@@ -17,6 +17,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.75rem;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     color: #1a202c;
     background-color: #F7FAF6;
@@ -52,27 +53,47 @@
   border-color: #2B921D;
 }
 
-/* Premium Architectural Frosted Glass Header Material */
-.header-frosted-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(10, 47, 13, 0.82) 0%,
-    rgba(18, 72, 30, 0.76) 40%,
-    rgba(14, 58, 23, 0.80) 75%,
-    rgba(10, 47, 13, 0.86) 100%
-  );
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 0 rgba(119, 209, 0, 0.10),
-    0 12px 32px -8px rgba(0, 0, 0, 0.40);
-  border-bottom: 1px solid rgba(119, 209, 0, 0.22);
+/* Accessible scroll margin for sticky header offset */
+section[id] {
+  scroll-margin-top: 5.75rem;
 }
 
-@supports not (backdrop-filter: blur(18px)) {
+/* Premium Architectural Frosted Glass Header Material */
+.header-frosted-glass {
+  background:
+    /* Subtle radial-gradient vignette darkening the corners to enhance frosted glass depth */
+    radial-gradient(
+      ellipse 95% 140% at 50% 50%,
+      transparent 55%,
+      rgba(5, 22, 7, 0.22) 80%,
+      rgba(3, 14, 4, 0.42) 100%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(10, 47, 13, 0.68) 0%,
+      rgba(18, 72, 30, 0.58) 40%,
+      rgba(14, 58, 23, 0.62) 75%,
+      rgba(10, 47, 13, 0.72) 100%
+    );
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 0 rgba(119, 209, 0, 0.12),
+    0 12px 32px -8px rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(119, 209, 0, 0.20);
+}
+
+@supports not (backdrop-filter: blur(16px)) {
   .header-frosted-glass {
-    background: rgba(10, 47, 13, 0.96);
+    background:
+      radial-gradient(
+        ellipse 95% 140% at 50% 50%,
+        transparent 55%,
+        rgba(5, 22, 7, 0.35) 80%,
+        rgba(3, 14, 4, 0.60) 100%
+      ),
+      rgba(10, 47, 13, 0.95);
   }
 }
 
@@ -129,8 +150,8 @@
 
 /* Scroll progress bar fill transition */
 .scroll-progressbar-fill {
-  transition: width 60ms linear;
-  will-change: width;
+  transition: transform 60ms linear;
+  will-change: transform;
 }
 
 /* Stagger delay utilities */
@@ -145,6 +166,27 @@
 }
 .reveal-delay-400 {
   transition-delay: 400ms;
+}
+
+/* Subtle header container entrance fade-in animation */
+@keyframes header-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-header-fade-in {
+  animation: header-fade-in 500ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-header-fade-in {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 /* Skeleton screen shimmer animation */

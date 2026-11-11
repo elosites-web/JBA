@@ -67,7 +67,6 @@ export const Hero: React.FC = () => {
 
             {/* CTA Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              {/* Click tracking hook comment: Google Ads / Meta Pixel */}
               <a
                 href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
                 target="_blank"
@@ -168,7 +167,7 @@ export const Hero: React.FC = () => {
                   className="w-full py-2.5 px-3 rounded-lg bg-[#2B921D] hover:bg-[#34ab23] text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                 >
                   <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
-                  <span>Chamar no WhatsApp: {siteConfig.brand.phoneFormatted}</span>
+                  <span>Chamar no WhatsApp</span>
                 </a>
               </div>
 

@@ -71,7 +71,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
 
         {/* CTA Button */}
         <div className="mt-auto pt-2">
-          {/* Click tracking hook comment: Google Ads / Meta Pixel */}
           <a
             href={buildWhatsAppLink(service.whatsappMessage)}
             target="_blank"

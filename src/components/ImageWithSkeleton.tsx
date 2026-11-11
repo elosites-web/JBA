@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Image as ImageIcon } from 'lucide-react';
 
 export interface ImageWithSkeletonProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -6,6 +6,8 @@ export interface ImageWithSkeletonProps extends React.ImgHTMLAttributes<HTMLImag
   theme?: 'light' | 'dark';
   iconSize?: 'sm' | 'md' | 'lg';
   children?: React.ReactNode;
+  lazy?: boolean;
+  rootMargin?: string;
 }
 
 /**
@@ -13,6 +15,9 @@ export interface ImageWithSkeletonProps extends React.ImgHTMLAttributes<HTMLImag
  * Displays a structured skeleton placeholder with animated shimmer effect
  * while heavy imagery loads, preventing layout shifts (CLS) and providing
  * smooth visual transitions.
+ *
+ * Integrates an Intersection Observer-based lazy-loading mechanism so image
+ * assets are only requested over the network when scrolling near the viewport.
  */
 export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
   src,
@@ -22,12 +27,50 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
   theme = 'light',
   iconSize = 'md',
   children,
+  lazy = true,
+  rootMargin = '200px 0px',
   onLoad,
   onError,
   ...imgProps
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(() => {
+    return !lazy || typeof IntersectionObserver === 'undefined';
+  });
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    if (isInView || !lazy) return;
+
+    const element = containerRef.current;
+    if (!element) return;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.unobserve(element);
+        }
+      },
+      {
+        rootMargin,
+        threshold: 0.01,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isInView, lazy, rootMargin]);
 
   const isDark = theme === 'dark';
 
@@ -39,6 +82,7 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
 
   return (
     <div
+      ref={containerRef}
       className={`relative w-full overflow-hidden ${
         isDark ? 'bg-[#0A2F0D]' : 'bg-neutral-200'
       } ${containerClassName}`}
@@ -84,23 +128,25 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
         </div>
       )}
 
-      {/* Real Image */}
-      <img
-        src={src}
-        alt={alt}
-        onLoad={(e) => {
-          setIsLoaded(true);
-          onLoad?.(e);
-        }}
-        onError={(e) => {
-          setHasError(true);
-          onError?.(e);
-        }}
-        className={`w-full h-full object-cover transition-all duration-500 ease-out ${
-          isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
-        } ${className}`}
-        {...imgProps}
-      />
+      {/* Real Image - requested only when scrolled into view */}
+      {isInView && (
+        <img
+          src={src}
+          alt={alt}
+          onLoad={(e) => {
+            setIsLoaded(true);
+            onLoad?.(e);
+          }}
+          onError={(e) => {
+            setHasError(true);
+            onError?.(e);
+          }}
+          className={`w-full h-full object-cover transition-all duration-500 ease-out ${
+            isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
+          } ${className}`}
+          {...imgProps}
+        />
+      )}
 
       {/* Any overlaid elements (e.g., badges, gradients, overlays) */}
       {children}

@@ -1,40 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles, Scissors, Waves } from 'lucide-react';
 import { buildWhatsAppLink } from '../config/siteConfig';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { ImageWithSkeleton } from './ImageWithSkeleton';
 
 export const VisualShowcase: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isBgInView, setIsBgInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setIsBgInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsBgInView(true);
+          observer.unobserve(el);
+        }
+      },
+      { rootMargin: '300px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const showcaseItems = [
     {
       category: 'Corte de Grama',
-      title: 'Gramados Uniformes e Bem Cuidados',
+      title: 'Corte de Grama com Roçadeira',
       description:
-        'Corte de grama com roçadeira, proporcionando alinhamento e limpeza para áreas verdes em Jundiaí.',
+        'Serviço de corte de grama com uso de roçadeira para a limpeza e o cuidado de áreas verdes em Jundiaí.',
       image: '/images/foto-gramado-amplo.webp',
-      alt: 'Fotografia ilustrativa de gramado verde amplo e bem nivelado',
+      alt: 'Fotografia ilustrativa de corte de grama com roçadeira',
       icon: <Sparkles className="w-4 h-4 text-[#77D100]" />,
       whatsappMsg:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
     {
       category: 'Poda de Plantas',
-      title: 'Cercas Vivas e Folhagens Alinhadas',
+      title: 'Poda de Plantas com Tesoura de Poda',
       description:
-        'Poda manual com tesourão de jardineiro para o alinhamento e a manutenção de cercas vivas e folhagens.',
+        'Poda manual de cercas vivas e folhagens utilizando tesourão de jardineiro e ferramentas de poda.',
       image: '/images/foto-cerca-viva.webp',
-      alt: 'Fotografia ilustrativa de poda de cerca viva com folhagens verdes',
+      alt: 'Fotografia ilustrativa de poda de plantas e cerca viva',
       icon: <Scissors className="w-4 h-4 text-[#77D100]" />,
       whatsappMsg:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
     },
     {
       category: 'Limpeza de Piscinas',
-      title: 'Água Cristalina e Área Externa Organizada',
+      title: 'Limpeza de Piscinas',
       description:
-        'Serviço de limpeza e manutenção de piscinas para o cuidado e a conservação da sua área de lazer.',
+        'Serviço de limpeza de piscinas para a remoção de resíduos, aspiração e higienização física da água.',
       image: '/images/foto-piscina-cristalina.webp',
-      alt: 'Fotografia ilustrativa de piscina limpa com água cristalina e deck ensolarado',
+      alt: 'Fotografia ilustrativa de serviço de limpeza de piscina',
       icon: <Waves className="w-4 h-4 text-[#4FD0FF]" />,
       whatsappMsg:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
@@ -43,19 +68,23 @@ export const VisualShowcase: React.FC = () => {
 
   return (
     <section
+      id="destaques"
+      ref={sectionRef}
       className="py-16 md:py-24 bg-[#0A2F0D] text-white relative overflow-hidden border-b border-[#165C2A]"
       aria-label="Destaques Visuais dos Serviços"
     >
-      {/* Background Decorative Panorama */}
+      {/* Background Decorative Panorama - lazy-loaded via Intersection Observer */}
       <div className="absolute inset-0 z-0 opacity-15 pointer-events-none">
-        <img
-          src="/images/foto-banner-jardim.webp"
-          alt=""
-          className="w-full h-full object-cover object-center"
-          loading="lazy"
-          width="1600"
-          height="800"
-        />
+        {isBgInView && (
+          <img
+            src="/images/foto-banner-jardim.webp"
+            alt=""
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+            width="1600"
+            height="800"
+          />
+        )}
         <div className="absolute inset-0 bg-[#0A2F0D] mix-blend-multiply" />
       </div>
 

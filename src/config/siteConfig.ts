@@ -142,7 +142,7 @@ export const siteConfig: SiteConfig = {
       description:
         'Serviço de limpeza de piscinas. Consulte os detalhes diretamente pelo WhatsApp.',
       image: '/images/foto-limpeza-piscina.webp',
-      alt: 'Fotografia ilustrativa de piscina limpa com água cristalina.',
+      alt: 'Fotografia ilustrativa de piscina limpa com água tratada.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
@@ -175,25 +175,25 @@ export const siteConfig: SiteConfig = {
     },
     {
       id: 'galeria-limpeza-piscina-1',
-      title: 'Limpeza e Manutenção de Piscina',
+      title: 'Limpeza de Piscina',
       category: 'limpeza-de-piscinas',
       categoryLabel: 'Limpeza de Piscina',
       image: '/images/foto-limpeza-piscina.webp',
-      alt: 'Fotografia ilustrativa de piscina limpa com água cristalina.',
+      alt: 'Fotografia ilustrativa de piscina limpa com tratamento de água.',
       description:
-        'Limpeza e conservação da água de piscinas com equipamentos adequados.',
+        'Limpeza e aspiração de piscinas com equipamentos adequados.',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
     },
     {
       id: 'galeria-corte-grama-2',
-      title: 'Gramado Amplo e Nivelado',
+      title: 'Corte de Gramado Amplo',
       category: 'corte-de-grama',
       categoryLabel: 'Corte de Grama',
       image: '/images/foto-gramado-amplo.webp',
       alt: 'Fotografia ilustrativa de corte de gramado em área ampla.',
       description:
-        'Manutenção de grandes áreas de gramado com corte uniforme.',
+        'Corte de grama com roçadeira em áreas amplas.',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
@@ -215,9 +215,9 @@ export const siteConfig: SiteConfig = {
       category: 'limpeza-de-piscinas',
       categoryLabel: 'Limpeza de Piscina',
       image: '/images/foto-piscina-cristalina.webp',
-      alt: 'Fotografia ilustrativa de área externa com piscina de água azul cristalina.',
+      alt: 'Fotografia ilustrativa de área externa com piscina limpa.',
       description:
-        'Manutenção periódica de piscina para água limpa e convidativa.',
+        'Serviço de limpeza periódica de piscinas residenciais.',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
     },

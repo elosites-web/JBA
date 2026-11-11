@@ -10,7 +10,7 @@ import React from 'react';
  * - Subtle lime/emerald foliage highlights (#77D100 / #2B921D)
  * - Whisper of crystal pool water (#4FD0FF)
  */
-export const HeaderGlassEtchings: React.FC = () => {
+export const HeaderGlassEtchings: React.FC = React.memo(() => {
   return (
     <div
       aria-hidden="true"
@@ -24,9 +24,9 @@ export const HeaderGlassEtchings: React.FC = () => {
         }}
       />
 
-      {/* Panoramic SVG with etched botanical line-art */}
+      {/* Panoramic Desktop SVG with etched botanical line-art (visible on screens >= 768px) */}
       <svg
-        className="w-full h-full object-cover"
+        className="hidden md:block w-full h-full object-cover"
         viewBox="0 0 1440 80"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -230,6 +230,117 @@ export const HeaderGlassEtchings: React.FC = () => {
           <circle cx="1370" cy="32" r="1" fill="#FFFFFF" fillOpacity="0.30" />
         </g>
       </svg>
+
+      {/* Dedicated Mobile SVG Composition (visible on screens < 768px) */}
+      <svg
+        className="block md:hidden w-full h-full"
+        viewBox="0 0 420 80"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <filter id="glassEtchGlowM" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="0.6" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+
+          <linearGradient id="etchBreeze1M" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.02" />
+            <stop offset="35%" stopColor="#77D100" stopOpacity="0.25" />
+            <stop offset="70%" stopColor="#FFFFFF" stopOpacity="0.20" />
+            <stop offset="100%" stopColor="#4FD0FF" stopOpacity="0.02" />
+          </linearGradient>
+
+          <linearGradient id="etchLeafLimeM" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.30" />
+            <stop offset="50%" stopColor="#77D100" stopOpacity="0.24" />
+            <stop offset="100%" stopColor="#2B921D" stopOpacity="0.12" />
+          </linearGradient>
+
+          <linearGradient id="etchLeafSilverM" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#CBD5E1" stopOpacity="0.12" />
+          </linearGradient>
+
+          <linearGradient id="etchWaterWhisperM" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#4FD0FF" stopOpacity="0.20" />
+            <stop offset="100%" stopColor="#0A84C9" stopOpacity="0.05" />
+          </linearGradient>
+        </defs>
+
+        <g filter="url(#glassEtchGlowM)" className="opacity-90">
+          {/* Main sweeping wind current flowing through central visual corridor */}
+          <path
+            d="M 60 54 C 105 48, 135 26, 175 30 C 215 34, 240 58, 280 48 C 320 38, 360 44, 410 32"
+            stroke="url(#etchBreeze1M)"
+            strokeWidth="1.1"
+            strokeLinecap="round"
+          />
+
+          {/* Secondary wind trail with aquatic curve */}
+          <path
+            d="M 85 64 C 120 60, 150 40, 190 42 C 230 44, 255 64, 295 56 C 330 48, 365 52, 405 46"
+            stroke="url(#etchWaterWhisperM)"
+            strokeWidth="0.8"
+            strokeLinecap="round"
+          />
+
+          {/* Recognizable botanical Leaf 1 - gracefully tilted in open central corridor */}
+          <g transform="translate(138, 30) rotate(-18)">
+            <path
+              d="M 0 0 C 10 -7, 20 -5, 26 0 C 20 6, 10 6, 0 0 Z"
+              stroke="url(#etchLeafLimeM)"
+              strokeWidth="1.0"
+              fill="rgba(119, 209, 0, 0.04)"
+            />
+            <path d="M 0 0 C 11 -1, 18 0, 26 0" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.7" />
+            <path d="M 7 -1.5 L 10 -4 M 13 -1 L 17 -3.5" stroke="rgba(255, 255, 255, 0.18)" strokeWidth="0.55" />
+            <path d="M 8 1.5 L 11 4 M 14 1 L 18 3.5" stroke="rgba(255, 255, 255, 0.18)" strokeWidth="0.55" />
+          </g>
+
+          {/* Companion Leaflet 2 - drifting higher along breeze */}
+          <g transform="translate(182, 22) rotate(18)">
+            <path
+              d="M 0 0 C 7 -4, 15 -3, 20 0 C 15 4, 7 4, 0 0 Z"
+              stroke="url(#etchLeafSilverM)"
+              strokeWidth="0.9"
+              fill="rgba(255, 255, 255, 0.03)"
+            />
+            <path d="M 0 0 L 20 0" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="0.6" />
+          </g>
+
+          {/* Delicate Branchlet with 2 small leaves in right-center zone */}
+          <g transform="translate(218, 40)">
+            <path
+              d="M 0 12 C 12 7, 24 5, 36 8"
+              stroke="rgba(255, 255, 255, 0.22)"
+              strokeWidth="0.85"
+              strokeLinecap="round"
+            />
+            <path
+              d="M 12 9 C 17 5, 23 6, 26 9 C 23 11, 17 11, 12 9 Z"
+              stroke="url(#etchLeafLimeM)"
+              strokeWidth="0.8"
+              fill="rgba(119, 209, 0, 0.04)"
+            />
+            <path
+              d="M 24 8 C 28 12, 33 11, 36 8 C 33 6, 28 6, 24 8 Z"
+              stroke="url(#etchLeafSilverM)"
+              strokeWidth="0.8"
+              fill="rgba(255, 255, 255, 0.03)"
+            />
+          </g>
+
+          {/* Drifting dew/pollen droplets */}
+          <circle cx="115" cy="48" r="1.0" fill="#77D100" fillOpacity="0.25" />
+          <circle cx="162" cy="24" r="1.1" fill="#FFFFFF" fillOpacity="0.30" />
+          <circle cx="202" cy="46" r="0.8" fill="#4FD0FF" fillOpacity="0.25" />
+          <circle cx="245" cy="28" r="1.0" fill="#FFFFFF" fillOpacity="0.25" />
+        </g>
+      </svg>
     </div>
   );
-};
+});
+
+HeaderGlassEtchings.displayName = 'HeaderGlassEtchings';

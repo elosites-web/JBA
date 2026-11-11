@@ -107,8 +107,8 @@ export const siteConfig: SiteConfig = {
   hero: {
     title: 'Jardinagem e limpeza de piscinas em Jundiaí.',
     subtitle:
-      'Conheça os serviços da JBA em corte de grama, poda de plantas e limpeza de piscinas. Solicite seu orçamento pelo WhatsApp.',
-    ctaText: 'Pedir orçamento no WhatsApp',
+      'Conheça os serviços da JBA em corte de grama, poda de plantas e limpeza de piscinas. Solicite uma visita para avaliação e orçamento pelo WhatsApp.',
+    ctaText: 'Consultar visita e orçamento',
   },
   services: [
     {
@@ -117,11 +117,11 @@ export const siteConfig: SiteConfig = {
       shortTitle: 'Corte de grama',
       description:
         'Cuidado com a grama e a vegetação do seu espaço, utilizando roçadeira.',
-      image: '/images/corte-de-grama.webp',
-      alt: 'Corte de grama com roçadeira em jardim.',
-      ctaText: 'Orçar corte de grama',
+      image: '/images/foto-corte-grama.webp',
+      alt: 'Fotografia ilustrativa de corte de grama com roçadeira.',
+      ctaText: 'Solicitar avaliação',
       whatsappMessage:
-        'Olá, Aristeu! Gostaria de solicitar um orçamento para corte de grama em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
     {
       id: 'poda-de-plantas',
@@ -129,11 +129,11 @@ export const siteConfig: SiteConfig = {
       shortTitle: 'Poda de plantas',
       description:
         'Poda e cuidado de plantas e vegetação com tesourão de jardineiro.',
-      image: '/images/poda-de-plantas.webp',
-      alt: 'Poda de plantas e cerca viva com tesourão de jardineiro.',
-      ctaText: 'Orçar poda de plantas',
+      image: '/images/foto-poda-plantas.webp',
+      alt: 'Fotografia ilustrativa de poda de plantas com tesourão de jardineiro.',
+      ctaText: 'Solicitar avaliação',
       whatsappMessage:
-        'Olá, Aristeu! Gostaria de solicitar um orçamento para poda de plantas em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
     },
     {
       id: 'limpeza-de-piscinas',
@@ -141,105 +141,105 @@ export const siteConfig: SiteConfig = {
       shortTitle: 'Limpeza de piscina',
       description:
         'Serviço de limpeza de piscinas. Consulte os detalhes diretamente pelo WhatsApp.',
-      image: '/images/limpeza-de-piscinas.webp',
-      alt: 'Limpeza de piscina com equipamento telescópico.',
-      ctaText: 'Orçar limpeza de piscina',
+      image: '/images/foto-limpeza-piscina.webp',
+      alt: 'Fotografia ilustrativa de piscina limpa com água cristalina.',
+      ctaText: 'Solicitar avaliação',
       whatsappMessage:
-        'Olá, Aristeu! Gostaria de solicitar um orçamento para limpeza de piscina em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
     },
   ],
   gallery: [
     {
       id: 'galeria-corte-grama-1',
-      title: 'Gramado Bem Aparado',
+      title: 'Corte de Grama e Manutenção',
       category: 'corte-de-grama',
       categoryLabel: 'Corte de Grama',
-      image: '/images/galeria-corte-grama-1.webp',
-      alt: 'Gramado bem aparado com canteiros floridos em Jundiaí.',
+      image: '/images/foto-corte-grama.webp',
+      alt: 'Fotografia ilustrativa de corte de grama em área ajardinada.',
       description:
-        'Corte uniforme e alinhamento de bordas ao longo dos canteiros e calçada de pedra.',
+        'Cuidado e corte de grama com roçadeira em áreas ajardinadas.',
       whatsappMessage:
-        'Olá, Aristeu! Vi o trabalho de corte de grama na galeria e gostaria de um orçamento em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
     {
       id: 'galeria-poda-plantas-1',
-      title: 'Poda e Nivelamento de Cerca Viva',
+      title: 'Poda de Cerca Viva e Arbustos',
       category: 'poda-de-plantas',
       categoryLabel: 'Poda de Plantas',
-      image: '/images/galeria-poda-plantas-1.webp',
-      alt: 'Cerca viva verde densa com linhas retas e arbustos esculturais podados.',
+      image: '/images/foto-poda-plantas.webp',
+      alt: 'Fotografia ilustrativa de poda de plantas com tesourão de jardineiro.',
       description:
-        'Alinhamento com tesourão de jardineiro, acabamento reto e preservação da folhagem saudável.',
+        'Poda e alinhamento de plantas, arbustos e cerca viva com tesourão de jardineiro.',
       whatsappMessage:
-        'Olá, Aristeu! Vi a poda de cerca viva na galeria e gostaria de solicitar um orçamento para poda em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
     },
     {
       id: 'galeria-limpeza-piscina-1',
-      title: 'Piscina Cristalina e Cuidada',
+      title: 'Limpeza e Manutenção de Piscina',
       category: 'limpeza-de-piscinas',
       categoryLabel: 'Limpeza de Piscina',
-      image: '/images/galeria-limpeza-piscina-1.webp',
-      alt: 'Piscina de azulejos azuis com água limpa e espelhada.',
+      image: '/images/foto-limpeza-piscina.webp',
+      alt: 'Fotografia ilustrativa de piscina limpa com água cristalina.',
       description:
-        'Aspiração do fundo, remoção de folhas e limpeza das bordas para água limpa e transparente.',
+        'Limpeza e conservação da água de piscinas com equipamentos adequados.',
       whatsappMessage:
-        'Olá, Aristeu! Vi a limpeza de piscina na galeria e gostaria de solicitar um orçamento em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
     },
     {
       id: 'galeria-corte-grama-2',
-      title: 'Corte de Grama em Área Ampla',
+      title: 'Gramado Amplo e Nivelado',
       category: 'corte-de-grama',
       categoryLabel: 'Corte de Grama',
-      image: '/images/galeria-corte-grama-2.webp',
-      alt: 'Área ampla de gramado verde em Jundiaí com corte alinhado.',
+      image: '/images/foto-gramado-amplo.webp',
+      alt: 'Fotografia ilustrativa de corte de gramado em área ampla.',
       description:
-        'Corte de extensões de gramado com roçadeira e descarte organizado de sobras.',
+        'Manutenção de grandes áreas de gramado com corte uniforme.',
       whatsappMessage:
-        'Olá, Aristeu! Vi o corte de grama em área ampla na galeria e gostaria de um orçamento em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
     {
       id: 'galeria-poda-plantas-2',
-      title: 'Paisagismo e Poda de Folhagens Tropicais',
+      title: 'Alinhamento e Cuidado de Folhagens',
       category: 'poda-de-plantas',
       categoryLabel: 'Poda de Plantas',
-      image: '/images/galeria-poda-plantas-2.webp',
-      alt: 'Arbustos tropicais, palmeiras e plantas ornamentais podadas em jardim.',
+      image: '/images/foto-cerca-viva.webp',
+      alt: 'Fotografia ilustrativa de poda de cerca viva ornamental.',
       description:
-        'Cuidado com palmeiras, arbustos e canteiros, promovendo crescimento saudável e visual harmonioso.',
+        'Alinhamento e manutenção de cercas vivas e plantas ornamentais.',
       whatsappMessage:
-        'Olá, Aristeu! Vi o cuidado com plantas ornamentais na galeria e gostaria de um orçamento em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
     },
     {
       id: 'galeria-limpeza-piscina-2',
-      title: 'Área de Lazer com Piscina Tratada',
+      title: 'Área Externa com Piscina Limpa',
       category: 'limpeza-de-piscinas',
       categoryLabel: 'Limpeza de Piscina',
-      image: '/images/galeria-limpeza-piscina-2.webp',
-      alt: 'Piscina com água azul pura refletindo árvores ao lado de deck de madeira.',
+      image: '/images/foto-piscina-cristalina.webp',
+      alt: 'Fotografia ilustrativa de área externa com piscina de água azul cristalina.',
       description:
-        'Manutenção de piscina, aspiração e equilíbrio para água limpa e convidativa.',
+        'Manutenção periódica de piscina para água limpa e convidativa.',
       whatsappMessage:
-        'Olá, Aristeu! Gostaria de um orçamento para manutenção de piscina em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
     },
   ],
   howItWorks: [
     {
       step: 1,
-      title: 'Peça seu orçamento',
+      title: 'Solicite uma visita',
       description:
-        'Entre em contato pelo WhatsApp e informe qual serviço você precisa para o seu imóvel.',
+        'Entre em contato pelo WhatsApp, informe o serviço desejado e indique sua preferência de data para uma visita.',
     },
     {
       step: 2,
-      title: 'Combine os detalhes',
+      title: 'Avaliação presencial e orçamento',
       description:
-        'Converse diretamente com Aristeu Barbosa para alinhar todas as informações do atendimento.',
+        'Aristeu vai até o imóvel para avaliar pessoalmente as características do local e apresentar o orçamento.',
     },
     {
       step: 3,
-      title: 'Serviço realizado',
+      title: 'Combine a realização do serviço',
       description:
-        'O serviço é realizado com zelo e cuidado conforme o que foi acordado entre as partes.',
+        'Após conhecer o orçamento e alinhar os detalhes diretamente com Aristeu, você poderá combinar a realização do serviço.',
     },
   ],
   whyChooseUs: [
@@ -262,15 +262,30 @@ export const siteConfig: SiteConfig = {
   serviceArea: {
     title: 'Atendimento em Jundiaí',
     text: 'A JBA oferece serviços de jardinagem e limpeza de piscinas em Jundiaí, SP.',
-    ctaText: 'Consultar disponibilidade',
+    ctaText: 'Consultar visita e orçamento',
     whatsappMessage:
-      'Olá, Aristeu! Gostaria de consultar a disponibilidade de atendimento para serviços em Jundiaí.',
+      'Olá, Aristeu! Gostaria de consultar a disponibilidade para uma visita de avaliação em Jundiaí.',
   },
   faq: [
     {
+      question: 'A JBA trabalha com preços fixos?',
+      answer:
+        'Não. Cada serviço depende das características e das condições do local. Por isso, Aristeu realiza uma avaliação presencial antes de apresentar o orçamento.',
+    },
+    {
+      question: 'Como funciona a visita para orçamento?',
+      answer:
+        'Você entra em contato pelo WhatsApp, informa o serviço desejado e combina uma data com Aristeu. Ele vai até o imóvel para avaliar o serviço pessoalmente e apresentar o orçamento. A visita só fica confirmada após o alinhamento direto pelo WhatsApp.',
+    },
+    {
+      question: 'Posso escolher o dia e o horário da visita?',
+      answer:
+        'Você pode informar sua preferência de data e período no formulário. Aristeu entrará em contato para verificar a disponibilidade e confirmar o agendamento.',
+    },
+    {
       question: 'Quais serviços posso solicitar à JBA?',
       answer:
-        'Você pode solicitar corte de grama com roçadeira, poda de plantas e cerca viva com tesourão de jardineiro, e limpeza de piscinas residenciais.',
+        'Você pode solicitar corte de grama com roçadeira, poda de plantas e cerca viva com tesourão de jardineiro, e limpeza de piscinas.',
     },
     {
       question: 'Em qual cidade a JBA atende?',
@@ -278,30 +293,25 @@ export const siteConfig: SiteConfig = {
         'A JBA atende na cidade de Jundiaí, SP.',
     },
     {
-      question: 'Como faço para solicitar um orçamento?',
+      question: 'O que preciso informar ao solicitar uma visita?',
       answer:
-        'Basta clicar em qualquer botão do WhatsApp deste site ou preencher o formulário abaixo. A mensagem será direcionada diretamente para o WhatsApp do Aristeu Barbosa.',
+        'Informe qual serviço você necessita (corte de grama, poda de plantas ou limpeza de piscina), se desejar informe o bairro em Jundiaí e sua preferência de data e período para a visita de avaliação.',
     },
     {
-      question: 'O que preciso informar ao pedir um orçamento?',
+      question: 'O que acontece depois da visita?',
       answer:
-        'Informe qual serviço você necessita (corte de grama, poda de plantas ou limpeza de piscina), se desejar informe o bairro em Jundiaí e descreva brevemente o tamanho ou estado da área.',
-    },
-    {
-      question: 'O que está incluído em cada serviço?',
-      answer:
-        'Cada atendimento é alinhado de forma transparente conforme a necessidade do seu espaço. Converse diretamente com o Aristeu pelo WhatsApp para alinhar os detalhes específicos do seu pedido.',
+        'Durante a visita, Aristeu avalia pessoalmente as características e condições do local para apresentar o orçamento. Com o orçamento aprovado, vocês combinam a realização do serviço.',
     },
   ],
   finalCta: {
     title: 'Vamos conversar sobre seu jardim ou piscina?',
-    text: 'Entre em contato com a JBA e solicite um orçamento para o serviço que você procura em Jundiaí.',
-    ctaText: 'Pedir orçamento no WhatsApp',
+    text: 'Entre em contato com a JBA e solicite uma visita para avaliação e orçamento do serviço que você procura em Jundiaí.',
+    ctaText: 'Solicitar visita no WhatsApp',
     whatsappMessage:
-      'Olá, Aristeu! Gostaria de solicitar um orçamento para serviços em Jundiaí.',
+      'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.',
   },
   disclaimer: {
-    aiImagesText: 'Imagens ilustrativas geradas por inteligência artificial.',
+    aiImagesText: 'Fotografias ilustrativas de banco de imagens para referência visual dos serviços da JBA.',
     privacyNote:
       'As informações preenchidas serão utilizadas apenas para montar sua mensagem no WhatsApp. Este site não possui armazenamento ou envio de dados para um servidor.',
   },

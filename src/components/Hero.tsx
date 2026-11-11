@@ -7,27 +7,38 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="inicio"
-      className="relative bg-[#0A2F0D] text-white pt-10 pb-16 md:pt-14 md:pb-24 overflow-hidden border-b border-[#165C2A]"
+      className="relative text-white pt-10 pb-16 md:pt-14 md:pb-24 overflow-hidden border-b border-[#165C2A]"
       aria-label="Apresentação JBA"
     >
-      {/* Background Decorative Lighting Gradients */}
-      <div
-        className="absolute top-0 right-0 w-96 h-96 bg-[#2B921D]/20 rounded-full blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-0 left-10 w-80 h-80 bg-[#0A84C9]/20 rounded-full blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
+      {/* Full-width Photography Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/images/hero-garden.webp"
+          alt="Jardim bem cuidado e paisagismo natural"
+          className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000"
+          loading="eager"
+          width="1920"
+          height="1080"
+        />
+        {/* Deep green editorial gradient overlay for superior contrast and readability */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#0A2F0D]/95 via-[#0A2F0D]/90 to-[#0A2F0D]/75 sm:to-[#0A2F0D]/80"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-[#0A2F0D] via-transparent to-[#0A2F0D]/60"
+          aria-hidden="true"
+        />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Main Hero Content */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left reveal-on-scroll">
             
             {/* Location Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#165C2A]/70 border border-[#77D100]/40 text-emerald-200 text-xs sm:text-sm font-semibold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#165C2A]/80 border border-[#77D100]/40 text-emerald-200 text-xs sm:text-sm font-semibold tracking-wide backdrop-blur-sm">
               <MapPin className="w-3.5 h-3.5 text-[#77D100]" />
               <span>{siteConfig.brand.fullLocation}</span>
             </div>
@@ -58,7 +69,7 @@ export const Hero: React.FC = () => {
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               {/* Click tracking hook comment: Google Ads / Meta Pixel */}
               <a
-                href={buildWhatsAppLink()}
+                href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white text-base font-bold shadow-xl shadow-emerald-950/60 hover:shadow-emerald-900/80 hover:scale-[1.02] active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
@@ -100,7 +111,7 @@ export const Hero: React.FC = () => {
               <div className="grid grid-cols-3 gap-2.5 mb-4">
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/corte-de-grama.webp"
+                    src="/images/foto-corte-grama.webp"
                     alt="Corte de grama com roçadeira"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
@@ -114,7 +125,7 @@ export const Hero: React.FC = () => {
 
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/poda-de-plantas.webp"
+                    src="/images/foto-poda-plantas.webp"
                     alt="Poda de plantas com tesourão"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
@@ -128,7 +139,7 @@ export const Hero: React.FC = () => {
 
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#0A84C9]/50 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/limpeza-de-piscinas.webp"
+                    src="/images/foto-limpeza-piscina.webp"
                     alt="Limpeza de piscinas"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
@@ -148,10 +159,10 @@ export const Hero: React.FC = () => {
                   <span className="text-[11px] text-emerald-200/70">Jundiaí, SP</span>
                 </div>
                 <p className="text-xs text-emerald-100/90 leading-relaxed mb-3">
-                  Precisa de manutenção no jardim ou na piscina? Envie uma mensagem e receba seu orçamento diretamente com o Aristeu.
+                  Precisa de manutenção no jardim ou na piscina? Envie uma mensagem para combinar uma visita de avaliação com o Aristeu.
                 </p>
                 <a
-                  href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar um orçamento para serviços em Jundiaí.')}
+                  href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento em Jundiaí.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-2.5 px-3 rounded-lg bg-[#2B921D] hover:bg-[#34ab23] text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors"

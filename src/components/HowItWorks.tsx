@@ -70,7 +70,7 @@ export const HowItWorks: React.FC = () => {
         {/* Action prompt */}
         <div className="mt-12 text-center reveal-on-scroll reveal-delay-300">
           <a
-            href={buildWhatsAppLink()}
+            href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-bold text-[#165C2A] hover:text-[#2B921D] transition-colors group"

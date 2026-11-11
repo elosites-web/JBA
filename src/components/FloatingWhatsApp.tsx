@@ -40,10 +40,10 @@ export const FloatingWhatsApp: React.FC = () => {
     >
       {/* Click tracking hook comment: Google Ads / Meta Pixel */}
       <a
-        href={buildWhatsAppLink('Olá, Aristeu! Gostaria de pedir um orçamento para serviços em Jundiaí.')}
+        href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento em Jundiaí.')}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Falar com Aristeu no WhatsApp"
+        aria-label="Solicitar visita para orçamento no WhatsApp"
         className="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:bg-[#1caa4f] text-white shadow-2xl shadow-emerald-950/50 hover:scale-110 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
         /* FUTURE TRACKING: onClick={() => window.gtag?.('event', 'conversion', { send_to: '...', event_category: 'floating_whatsapp' })} */
       >
@@ -60,7 +60,7 @@ export const FloatingWhatsApp: React.FC = () => {
           role="tooltip"
           className="absolute right-full mr-3 hidden sm:group-hover:flex items-center whitespace-nowrap rounded-lg bg-[#0A2F0D] px-3 py-1.5 text-xs font-bold text-white shadow-lg border border-[#165C2A] transition-opacity"
         >
-          Orçamento no WhatsApp
+          Solicitar visita no WhatsApp
         </span>
       </a>
     </div>

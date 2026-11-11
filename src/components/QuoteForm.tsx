@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertCircle, Send, ShieldCheck } from 'lucide-react';
+import { AlertCircle, Calendar, Clock, ShieldCheck, Send } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
@@ -7,15 +7,43 @@ export const QuoteForm: React.FC = () => {
   const [name, setName] = useState('');
   const [service, setService] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
+  const [visitDate, setVisitDate] = useState('');
+  const [period, setPeriod] = useState('');
   const [message, setMessage] = useState('');
 
   const [errors, setErrors] = useState<{ name?: string; service?: string }>({});
 
   const serviceOptions = [
-    { id: 'Corte de grama', label: 'Corte de grama (com roçadeira)' },
-    { id: 'Poda de plantas', label: 'Poda de plantas (com tesourão)' },
+    { id: 'Corte de grama (com roçadeira)', label: 'Corte de grama (com roçadeira)' },
+    { id: 'Poda de plantas (com tesourão)', label: 'Poda de plantas (com tesourão)' },
     { id: 'Limpeza de piscinas', label: 'Limpeza de piscinas' },
   ];
+
+  const periodOptions = [
+    { id: '', label: 'Selecione o período...' },
+    { id: 'Manhã', label: 'Manhã' },
+    { id: 'Tarde', label: 'Tarde' },
+    { id: 'Sem preferência', label: 'Sem preferência' },
+  ];
+
+  // Disallow selecting past dates (YYYY-MM-DD in local time)
+  const getTodayMinDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  // Convert YYYY-MM-DD to DD/MM/AAAA for Brazilian standard display
+  const formatDateBR = (dateStr: string): string => {
+    if (!dateStr) return '';
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+    return dateStr;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +51,7 @@ export const QuoteForm: React.FC = () => {
     const newErrors: { name?: string; service?: string } = {};
 
     if (!name.trim()) {
-      newErrors.name = 'Por favor, informe seu nome.';
+      newErrors.name = 'Por favor, informe seu nome completo.';
     }
     if (!service) {
       newErrors.service = 'Por favor, selecione o serviço desejado.';
@@ -37,22 +65,43 @@ export const QuoteForm: React.FC = () => {
     setErrors({});
 
     // Construct the formatted WhatsApp message exactly as requested
-    let fullText = `Olá, Aristeu! Gostaria de solicitar um orçamento com a JBA.\n\n`;
-    fullText += `Nome: ${name.trim()}\n`;
-    fullText += `Serviço desejado: ${service}\n`;
+    const messageLines: string[] = [
+      'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA.',
+      '',
+      `Nome: ${name.trim()}`,
+      `Serviço desejado: ${service}`,
+    ];
+
     if (neighborhood.trim()) {
-      fullText += `Bairro: ${neighborhood.trim()}\n`;
+      messageLines.push(`Bairro: ${neighborhood.trim()}`);
     }
+
+    if (visitDate) {
+      messageLines.push(`Data preferencial para visita: ${formatDateBR(visitDate)}`);
+    }
+
+    if (period && period.trim()) {
+      messageLines.push(`Período preferencial: ${period.trim()}`);
+    }
+
     if (message.trim()) {
-      fullText += `Mensagem: ${message.trim()}\n`;
+      messageLines.push(`Informações adicionais: ${message.trim()}`);
     }
+
+    messageLines.push('');
+    messageLines.push('Gostaria de combinar a visita para que você possa avaliar o local e preparar o orçamento.');
+
+    const fullText = messageLines.join('\n');
 
     const whatsappUrl = `https://wa.me/${siteConfig.brand.whatsappNumber}?text=${encodeURIComponent(
       fullText
     )}`;
 
-    // Open WhatsApp in new tab
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    // Open WhatsApp in new tab, fallback to direct location redirect if popup is blocked
+    const win = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    if (!win) {
+      window.location.href = whatsappUrl;
+    }
   };
 
   return (
@@ -65,17 +114,17 @@ export const QuoteForm: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center mb-10 reveal-on-scroll">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#165C2A]/10 border border-[#2B921D]/30 text-[#165C2A] text-xs font-bold uppercase tracking-wider mb-3">
-            Solicitação Rápida
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#165C2A]/10 border border-[#2B921D]/30 text-[#165C2A] text-xs font-bold uppercase tracking-wider mb-3">
+            Avaliação Presencial
           </div>
           <h2
             id="orcamento-heading"
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0A2F0D] tracking-tight mb-4"
           >
-            Peça seu Orçamento
+            Solicite uma visita para orçamento
           </h2>
           <p className="text-base text-neutral-600 leading-relaxed max-w-xl mx-auto">
-            Preencha os dados abaixo para gerar sua mensagem personalizada e conversar diretamente com o Aristeu Barbosa no WhatsApp.
+            Cada serviço é avaliado de acordo com as características do local. Preencha os dados abaixo para solicitar uma visita do Aristeu. Após avaliar o imóvel pessoalmente, ele apresentará o orçamento.
           </p>
         </div>
 
@@ -83,13 +132,13 @@ export const QuoteForm: React.FC = () => {
         <div className="rounded-3xl bg-[#F7FAF6] border border-neutral-200/90 p-6 sm:p-10 shadow-lg reveal-on-scroll reveal-delay-100">
           <form onSubmit={handleSubmit} noValidate className="space-y-6">
             
-            {/* Field: Nome */}
+            {/* Field: Nome Completo (Obrigatório) */}
             <div>
               <label
                 htmlFor="form-nome"
                 className="block text-sm font-bold text-neutral-900 mb-1.5"
               >
-                Seu Nome <span className="text-red-500" aria-hidden="true">*</span>
+                Nome completo <span className="text-red-500" aria-hidden="true">*</span>
               </label>
               <input
                 id="form-nome"
@@ -117,13 +166,13 @@ export const QuoteForm: React.FC = () => {
               )}
             </div>
 
-            {/* Field: Serviço Desejado */}
+            {/* Field: Serviço Desejado (Obrigatório) */}
             <div>
               <label
                 htmlFor="form-servico"
                 className="block text-sm font-bold text-neutral-900 mb-1.5"
               >
-                Serviço Desejado <span className="text-red-500" aria-hidden="true">*</span>
+                Serviço desejado <span className="text-red-500" aria-hidden="true">*</span>
               </label>
               <select
                 id="form-servico"
@@ -132,7 +181,7 @@ export const QuoteForm: React.FC = () => {
                   setService(e.target.value);
                   if (errors.service) setErrors((prev) => ({ ...prev, service: undefined }));
                 }}
-                className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none transition-all appearance-none cursor-pointer ${
+                className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none transition-all cursor-pointer ${
                   errors.service
                     ? 'border-red-500 ring-2 ring-red-200'
                     : 'border-neutral-300 focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30'
@@ -156,7 +205,7 @@ export const QuoteForm: React.FC = () => {
               )}
             </div>
 
-            {/* Field: Bairro (opcional) */}
+            {/* Field: Bairro (Opcional) */}
             <div>
               <label
                 htmlFor="form-bairro"
@@ -174,20 +223,73 @@ export const QuoteForm: React.FC = () => {
               />
             </div>
 
-            {/* Field: Mensagem adicional (opcional) */}
+            {/* Grid for Date and Period Preferences */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              {/* Field: Data preferencial para a visita (Opcional, min hoje) */}
+              <div>
+                <label
+                  htmlFor="form-data-visita"
+                  className="block text-sm font-bold text-neutral-900 mb-1.5"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="w-4 h-4 text-[#165C2A]" />
+                    <span>Data preferencial para a visita</span>
+                  </span>
+                  <span className="text-xs font-normal text-neutral-500 ml-1">(opcional)</span>
+                </label>
+                <input
+                  id="form-data-visita"
+                  type="date"
+                  min={getTodayMinDate()}
+                  value={visitDate}
+                  onChange={(e) => setVisitDate(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-white text-neutral-900 text-sm focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30 focus:outline-none transition-all cursor-pointer"
+                />
+              </div>
+
+              {/* Field: Período preferencial (Opcional) */}
+              <div>
+                <label
+                  htmlFor="form-periodo-visita"
+                  className="block text-sm font-bold text-neutral-900 mb-1.5"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-4 h-4 text-[#165C2A]" />
+                    <span>Período preferencial</span>
+                  </span>
+                  <span className="text-xs font-normal text-neutral-500 ml-1">(opcional)</span>
+                </label>
+                <select
+                  id="form-periodo-visita"
+                  value={period}
+                  onChange={(e) => setPeriod(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-white text-neutral-900 text-sm focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30 focus:outline-none transition-all cursor-pointer"
+                >
+                  {periodOptions.map((opt) => (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+            </div>
+
+            {/* Field: Informações adicionais (Opcional) */}
             <div>
               <label
                 htmlFor="form-mensagem"
                 className="block text-sm font-bold text-neutral-900 mb-1.5"
               >
-                Mensagem adicional <span className="text-xs font-normal text-neutral-500">(opcional)</span>
+                Informações adicionais <span className="text-xs font-normal text-neutral-500">(opcional)</span>
               </label>
               <textarea
                 id="form-mensagem"
                 rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Descreva brevemente o que você precisa."
+                placeholder="Se desejar, conte um pouco sobre o local ou o serviço que precisa."
                 className="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-white text-neutral-900 text-sm focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30 focus:outline-none transition-all resize-y"
               />
             </div>
@@ -199,9 +301,16 @@ export const QuoteForm: React.FC = () => {
                 className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white text-base font-bold shadow-lg hover:shadow-xl active:scale-[0.99] transition-all cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
               >
                 <WhatsAppIcon className="w-5 h-5 shrink-0" />
-                <span>Enviar Orçamento no WhatsApp</span>
+                <span>Solicitar visita pelo WhatsApp</span>
                 <Send className="w-4 h-4 shrink-0" />
               </button>
+            </div>
+
+            {/* Notice about date/period preference & in-person quote */}
+            <div className="p-4 rounded-xl bg-emerald-50/80 border border-[#2B921D]/30 text-left">
+              <p className="text-xs text-[#0A2F0D] leading-relaxed font-medium">
+                <strong>Importante:</strong> a data e o período informados são apenas uma preferência. Aristeu entrará em contato para confirmar a disponibilidade da visita. O orçamento será elaborado após a avaliação presencial do local.
+              </p>
             </div>
 
             {/* Privacy notice */}

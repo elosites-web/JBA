@@ -58,10 +58,10 @@ export const Footer: React.FC = () => {
               Atendimento Direto
             </h3>
             <p className="text-xs text-emerald-200/70 leading-relaxed">
-              Solicite seu orçamento diretamente pelo aplicativo de mensagens.
+              Solicite uma visita para avaliação e orçamento diretamente pelo aplicativo de mensagens.
             </p>
             <a
-              href={buildWhatsAppLink()}
+              href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] text-white text-xs font-bold transition-all shadow-md"

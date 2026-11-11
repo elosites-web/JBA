@@ -151,7 +151,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({
               {item.description}
             </p>
             <p className="text-[11px] text-emerald-300/50 italic pt-1">
-              * Imagem ilustrativa representativa do padrão de serviço executado pela JBA em Jundiaí.
+              * Fotografia ilustrativa de banco de imagens para referência visual do serviço oferecido pela JBA em Jundiaí.
             </p>
           </div>
 
@@ -162,7 +162,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({
             className="w-full md:w-auto shrink-0 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white font-bold text-sm shadow-xl transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
           >
             <WhatsAppIcon className="w-4 h-4 shrink-0" />
-            <span>Orçar este serviço no WhatsApp</span>
+            <span>Solicitar avaliação no WhatsApp</span>
           </a>
         </div>
       </div>

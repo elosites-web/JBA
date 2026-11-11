@@ -43,7 +43,7 @@ export const HowItWorks: React.FC = () => {
             return (
               <div
                 key={item.step}
-                className={`relative rounded-2xl bg-[#F7FAF6] p-8 border border-neutral-200/80 hover:border-[#2B921D]/50 hover:shadow-lg transition-all duration-300 flex flex-col text-left group reveal-on-scroll ${delayClass}`}
+                className={`step-card-interactive relative rounded-2xl bg-[#F7FAF6] p-8 border border-neutral-200/80 shadow-sm hover:shadow-xl hover:shadow-[#2B921D]/15 hover:border-[#2B921D] flex flex-col text-left group reveal-on-scroll ${delayClass}`}
               >
                 {/* Step Number & Icon Header */}
                 <div className="flex items-center justify-between mb-6">

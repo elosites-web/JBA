@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Maximize2, Sparkles, Scissors, Waves, Image as ImageIcon } from 'lucide-react';
 import { siteConfig, GalleryItem } from '../config/siteConfig';
 import { GalleryModal } from './GalleryModal';
+import { ImageWithSkeleton } from './ImageWithSkeleton';
 
 type CategoryFilter = 'todos' | 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas';
 
 export const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('todos');
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
-  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 
   const filterTabs: { id: CategoryFilter; label: string; icon?: React.ReactNode }[] = [
     { id: 'todos', label: 'Todos os Serviços' },
@@ -33,10 +33,6 @@ export const Gallery: React.FC = () => {
     activeCategory === 'todos'
       ? siteConfig.gallery
       : siteConfig.gallery.filter((item) => item.category === activeCategory);
-
-  const handleImageLoad = (id: string) => {
-    setLoadedImages((prev) => ({ ...prev, [id]: true }));
-  };
 
   return (
     <section
@@ -100,7 +96,6 @@ export const Gallery: React.FC = () => {
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredItems.map((item, index) => {
-            const isLoaded = loadedImages[item.id] || false;
             const isPool = item.category === 'limpeza-de-piscinas';
             const delayClass =
               index % 3 === 1
@@ -115,29 +110,17 @@ export const Gallery: React.FC = () => {
                 className={`group relative rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer reveal-on-scroll ${delayClass}`}
                 onClick={() => setSelectedItem(item)}
               >
-                {/* 4:3 Aspect Ratio Image with Skeleton Shimmer */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-200">
-                  {!isLoaded && (
-                    <div
-                      className="absolute inset-0 skeleton-shimmer z-10 flex items-center justify-center"
-                      aria-hidden="true"
-                    >
-                      <ImageIcon className="w-8 h-8 text-neutral-400 animate-pulse" />
-                    </div>
-                  )}
-
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    onLoad={() => handleImageLoad(item.id)}
-                    className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
-                      isLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    width="600"
-                    height="450"
-                  />
-
+                {/* 4:3 Aspect Ratio Image with Structured Skeleton State */}
+                <ImageWithSkeleton
+                  src={item.image}
+                  alt={item.alt}
+                  theme="light"
+                  containerClassName="aspect-[4/3]"
+                  className="transition-all duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  width="600"
+                  height="450"
+                >
                   {/* Category Pill Tag */}
                   <div className="absolute top-3 left-3 z-20">
                     <span
@@ -166,7 +149,7 @@ export const Gallery: React.FC = () => {
                       Clique para ampliar e ver detalhes →
                     </span>
                   </div>
-                </div>
+                </ImageWithSkeleton>
 
                 {/* Visible Card Footer */}
                 <div className="p-4 bg-white text-left">

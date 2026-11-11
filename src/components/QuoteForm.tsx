@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { AlertCircle, Calendar, Clock, ShieldCheck, Send } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { getTodayMinDate, isPastDate, formatDateBR } from '../utils/dateValidation';
 
 export const QuoteForm: React.FC = () => {
   const [name, setName] = useState('');
@@ -9,9 +10,12 @@ export const QuoteForm: React.FC = () => {
   const [neighborhood, setNeighborhood] = useState('');
   const [visitDate, setVisitDate] = useState('');
   const [period, setPeriod] = useState('');
-  const [message, setMessage] = useState('');
+  const [additionalNotes, setAdditionalNotes] = useState('');
 
-  const [errors, setErrors] = useState<{ name?: string; service?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string; service?: string; visitDate?: string }>({});
+
+  // Minimum selectable date (today in local time formatted as YYYY-MM-DD)
+  const todayMinDate = useMemo(() => getTodayMinDate(), []);
 
   const serviceOptions = [
     { id: 'Corte de grama (com roçadeira)', label: 'Corte de grama (com roçadeira)' },
@@ -26,35 +30,19 @@ export const QuoteForm: React.FC = () => {
     { id: 'Sem preferência', label: 'Sem preferência' },
   ];
 
-  // Disallow selecting past dates (YYYY-MM-DD in local time)
-  const getTodayMinDate = () => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
-
-  // Convert YYYY-MM-DD to DD/MM/AAAA for Brazilian standard display
-  const formatDateBR = (dateStr: string): string => {
-    if (!dateStr) return '';
-    const parts = dateStr.split('-');
-    if (parts.length === 3) {
-      return `${parts[2]}/${parts[1]}/${parts[0]}`;
-    }
-    return dateStr;
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newErrors: { name?: string; service?: string } = {};
+    const newErrors: { name?: string; service?: string; visitDate?: string } = {};
 
     if (!name.trim()) {
       newErrors.name = 'Por favor, informe seu nome completo.';
     }
     if (!service) {
       newErrors.service = 'Por favor, selecione o serviço desejado.';
+    }
+    if (visitDate && isPastDate(visitDate, todayMinDate)) {
+      newErrors.visitDate = 'A data para visita não pode ser anterior a hoje.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -84,8 +72,8 @@ export const QuoteForm: React.FC = () => {
       messageLines.push(`Período preferencial: ${period.trim()}`);
     }
 
-    if (message.trim()) {
-      messageLines.push(`Informações adicionais: ${message.trim()}`);
+    if (additionalNotes.trim()) {
+      messageLines.push(`Observações adicionais: ${additionalNotes.trim()}`);
     }
 
     messageLines.push('');
@@ -97,9 +85,18 @@ export const QuoteForm: React.FC = () => {
       fullText
     )}`;
 
-    // Open WhatsApp in new tab, fallback to direct location redirect if popup is blocked
-    const win = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    if (!win) {
+    // Abrir o WhatsApp em nova aba preservando noopener e noreferrer
+    // Evita o falso positivo de bloqueio onde window.open com noopener retorna null e causava redirecionamento indevido da página atual
+    try {
+      const link = document.createElement('a');
+      link.href = whatsappUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch {
+      // Alternativa caso ocorra restrição no ambiente de execução
       window.location.href = whatsappUrl;
     }
   };
@@ -241,11 +238,26 @@ export const QuoteForm: React.FC = () => {
                 <input
                   id="form-data-visita"
                   type="date"
-                  min={getTodayMinDate()}
+                  min={todayMinDate}
                   value={visitDate}
-                  onChange={(e) => setVisitDate(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-white text-neutral-900 text-sm focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30 focus:outline-none transition-all cursor-pointer"
+                  onChange={(e) => {
+                    setVisitDate(e.target.value);
+                    if (errors.visitDate) setErrors((prev) => ({ ...prev, visitDate: undefined }));
+                  }}
+                  aria-invalid={!!errors.visitDate}
+                  aria-describedby={errors.visitDate ? 'error-data-visita' : undefined}
+                  className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none transition-all cursor-pointer ${
+                    errors.visitDate
+                      ? 'border-red-500 ring-2 ring-red-200'
+                      : 'border-neutral-300 focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30'
+                  }`}
                 />
+                {errors.visitDate && (
+                  <p id="error-data-visita" className="mt-1.5 text-xs text-red-600 flex items-center gap-1 font-medium">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{errors.visitDate}</span>
+                  </p>
+                )}
               </div>
 
               {/* Field: Período preferencial (Opcional) */}
@@ -276,20 +288,20 @@ export const QuoteForm: React.FC = () => {
 
             </div>
 
-            {/* Field: Informações adicionais (Opcional) */}
+            {/* Field: Observações Adicionais (Opcional) */}
             <div>
               <label
-                htmlFor="form-mensagem"
+                htmlFor="form-observacoes"
                 className="block text-sm font-bold text-neutral-900 mb-1.5"
               >
-                Informações adicionais <span className="text-xs font-normal text-neutral-500">(opcional)</span>
+                Observações Adicionais <span className="text-xs font-normal text-neutral-500">(opcional)</span>
               </label>
               <textarea
-                id="form-mensagem"
+                id="form-observacoes"
                 rows={3}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Se desejar, conte um pouco sobre o local ou o serviço que precisa."
+                value={additionalNotes}
+                onChange={(e) => setAdditionalNotes(e.target.value)}
+                placeholder="Se desejar, detalhe as características do local (ex.: tamanho do terreno, tipo de vegetação, acesso ou necessidades específicas antes da visita técnica)."
                 className="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-white text-neutral-900 text-sm focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30 focus:outline-none transition-all resize-y"
               />
             </div>

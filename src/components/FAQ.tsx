@@ -69,7 +69,7 @@ export const FAQ: React.FC = () => {
                     {item.question}
                   </span>
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200 ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ease-out ${
                       isOpen ? 'rotate-180 bg-[#165C2A] text-[#77D100]' : 'bg-neutral-100 text-neutral-600'
                     }`}
                   >
@@ -77,27 +77,29 @@ export const FAQ: React.FC = () => {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={buttonId}
-                    className="px-5 pb-6 sm:px-6 pt-1 text-sm sm:text-base text-neutral-600 leading-relaxed border-t border-neutral-100 animate-in fade-in duration-200"
-                  >
-                    <p>{item.answer}</p>
-                    <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center gap-2">
-                      <WhatsAppIcon className="w-4 h-4 text-[#2B921D]" />
-                      <a
-                        href={buildWhatsAppLink(`Olá, Aristeu! Tenho uma dúvida sobre: ${item.question}`)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs sm:text-sm font-semibold text-[#165C2A] hover:text-[#2B921D] underline"
-                      >
-                        Conversar sobre isso no WhatsApp
-                      </a>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  className={`faq-accordion-content ${isOpen ? 'is-open' : ''}`}
+                >
+                  <div className="faq-accordion-inner">
+                    <div className="px-5 pb-6 sm:px-6 pt-1 text-sm sm:text-base text-neutral-600 leading-relaxed border-t border-neutral-100">
+                      <p>{item.answer}</p>
+                      <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center gap-2">
+                        <WhatsAppIcon className="w-4 h-4 text-[#2B921D]" />
+                        <a
+                          href={buildWhatsAppLink(`Olá, Aristeu! Tenho uma dúvida sobre: ${item.question}`)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs sm:text-sm font-semibold text-[#165C2A] hover:text-[#2B921D] underline"
+                        >
+                          Conversar sobre isso no WhatsApp
+                        </a>
+                      </div>
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

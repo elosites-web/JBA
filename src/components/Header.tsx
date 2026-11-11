@@ -1,11 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
 import { BrandLogo } from './BrandLogo';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { HeaderGlassEtchings } from './HeaderGlassEtchings';
 
 export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0) {
+        const currentScroll = window.scrollY;
+        const progress = Math.min(100, Math.max(0, (currentScroll / scrollHeight) * 100));
+        setScrollProgress(progress);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { label: 'Serviços', href: '#servicos' },
@@ -26,8 +46,39 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0A2F0D]/95 backdrop-blur-md border-b border-[#165C2A]/60 shadow-lg transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full header-frosted-glass transition-all">
+      {/* Barra de Progresso de Rolagem Horizontal no Topo do Cabeçalho */}
+      <div
+        role="progressbar"
+        aria-label="Progresso de rolagem da página"
+        aria-valuenow={Math.round(scrollProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        className="absolute top-0 left-0 w-full h-[3px] bg-black/30 pointer-events-none overflow-visible z-50"
+      >
+        <div
+          className="scroll-progressbar-fill h-full bg-gradient-to-r from-[#165C2A] via-[#2B921D] to-[#77D100] relative"
+          style={{
+            width: `${scrollProgress}%`,
+          }}
+        >
+          {scrollProgress > 0 && (
+            <span
+              aria-hidden="true"
+              className="absolute right-0 top-0 h-full w-[8px] rounded-r-full pointer-events-none"
+              style={{
+                background: 'linear-gradient(90deg, rgba(203, 213, 225, 0.3), #CBD5E1 35%, #E2E8F0 70%, #FFFFFF 100%)',
+                boxShadow: '0 0 3px rgba(226, 232, 240, 0.95), 1px 0 3px rgba(255, 255, 255, 0.95)',
+              }}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Subtle wind-swept botanical leaf etchings embedded into frosted glass */}
+      <HeaderGlassEtchings />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a
@@ -96,10 +147,10 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu with frosted glass style */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden bg-[#0A2F0D] border-b border-[#165C2A] px-4 pt-3 pb-6 space-y-3 animate-in fade-in slide-in-from-top-4 duration-200 shadow-2xl"
+          className="lg:hidden bg-[#0A2F0D]/95 backdrop-blur-xl border-b border-emerald-400/20 px-4 pt-3 pb-6 space-y-3 animate-in fade-in slide-in-from-top-4 duration-200 shadow-2xl relative z-20"
           role="region"
           aria-label="Menu móvel"
         >

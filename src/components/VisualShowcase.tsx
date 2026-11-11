@@ -2,6 +2,7 @@ import React from 'react';
 import { Sparkles, Scissors, Waves } from 'lucide-react';
 import { buildWhatsAppLink } from '../config/siteConfig';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { ImageWithSkeleton } from './ImageWithSkeleton';
 
 export const VisualShowcase: React.FC = () => {
   const showcaseItems = [
@@ -20,7 +21,7 @@ export const VisualShowcase: React.FC = () => {
       category: 'Poda de Plantas',
       title: 'Cercas Vivas e Folhagens Alinhadas',
       description:
-        'Poda manual com tesourão de jardineiro, garantindo acabamento reto, harmonia estética e saúde vegetal.',
+        'Poda manual com tesourão de jardineiro para o alinhamento e a manutenção de cercas vivas e folhagens.',
       image: '/images/foto-cerca-viva.webp',
       alt: 'Fotografia ilustrativa de poda de cerca viva com folhagens verdes',
       icon: <Scissors className="w-4 h-4 text-[#77D100]" />,
@@ -31,7 +32,7 @@ export const VisualShowcase: React.FC = () => {
       category: 'Limpeza de Piscinas',
       title: 'Água Cristalina e Área Externa Organizada',
       description:
-        'Serviço de limpeza de piscinas para que sua área de lazer fique sempre limpa, transparente e agradável.',
+        'Serviço de limpeza e manutenção de piscinas para o cuidado e a conservação da sua área de lazer.',
       image: '/images/foto-piscina-cristalina.webp',
       alt: 'Fotografia ilustrativa de piscina limpa com água cristalina e deck ensolarado',
       icon: <Waves className="w-4 h-4 text-[#4FD0FF]" />,
@@ -84,27 +85,28 @@ export const VisualShowcase: React.FC = () => {
                 key={item.category}
                 className={`group flex flex-col rounded-2xl overflow-hidden bg-[#0e3b12]/90 border border-[#165C2A] hover:border-[#77D100]/50 shadow-xl transition-all duration-300 hover:-translate-y-1.5 reveal-on-scroll ${delayClass}`}
               >
-                {/* Large 16:10 Photograph */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0A2F0D]">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="lazy"
-                    width="600"
-                    height="375"
-                  />
+                {/* Large 16:10 Photograph with Structured Skeleton State */}
+                <ImageWithSkeleton
+                  src={item.image}
+                  alt={item.alt}
+                  theme="dark"
+                  containerClassName="aspect-[16/10]"
+                  className="transition-transform duration-700 ease-out group-hover:scale-105"
+                  loading="lazy"
+                  width="600"
+                  height="375"
+                >
                   {/* Subtle Gradient Shade on Bottom of Photo */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e3b12] via-transparent to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e3b12] via-transparent to-transparent opacity-80 pointer-events-none" />
 
                   {/* Category Pill Tag */}
-                  <div className="absolute top-3 left-3 z-10">
+                  <div className="absolute top-3 left-3 z-20">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#0A2F0D]/90 text-white border border-[#2B921D]/40 backdrop-blur-md shadow-md">
                       {item.icon}
                       <span>{item.category}</span>
                     </span>
                   </div>
-                </div>
+                </ImageWithSkeleton>
 
                 {/* Content */}
                 <div className="flex flex-col flex-grow p-6 text-left">

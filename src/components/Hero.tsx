@@ -13,20 +13,27 @@ export const Hero: React.FC = () => {
       {/* Full-width Photography Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img
-          src="/images/hero-garden.webp"
-          alt="Jardim bem cuidado e paisagismo natural"
-          className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000"
+          src="/images/hero-garden-premium.webp"
+          alt="Jardim residencial bem cuidado com gramado viçoso e folhagens ornamentais"
+          className="w-full h-full object-cover object-[50%_center] sm:object-[60%_35%] transform scale-105 transition-transform duration-1000"
           loading="eager"
-          width="1920"
-          height="1080"
+          fetchPriority="high"
+          width="2400"
+          height="1600"
         />
-        {/* Deep green editorial gradient overlay for superior contrast and readability */}
+        {/* Refined editorial gradient: high contrast on content left, vibrant photograph reveal on right */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-[#0A2F0D]/95 via-[#0A2F0D]/90 to-[#0A2F0D]/75 sm:to-[#0A2F0D]/80"
+          className="absolute inset-0 bg-gradient-to-r from-[#0A2F0D]/95 via-[#0A2F0D]/75 to-[#0A2F0D]/30 lg:from-[#0A2F0D]/92 lg:via-[#0A2F0D]/60 lg:to-[#0A2F0D]/20"
           aria-hidden="true"
         />
+        {/* Subtle vertical vignette grounding top and bottom borders */}
         <div
-          className="absolute inset-0 bg-gradient-to-t from-[#0A2F0D] via-transparent to-[#0A2F0D]/60"
+          className="absolute inset-0 bg-gradient-to-t from-[#0A2F0D] via-transparent to-[#0A2F0D]/50"
+          aria-hidden="true"
+        />
+        {/* Subtle natural cinematic corner vignette */}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,transparent_50%,rgba(10,47,13,0.4)_100%)] pointer-events-none"
           aria-hidden="true"
         />
       </div>

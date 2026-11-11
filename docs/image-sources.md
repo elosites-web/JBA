@@ -6,6 +6,18 @@ Todas as imagens foram obtidas do acervo gratuito do Pexels sob a [Licença Pexe
 
 ---
 
+### Principal: Seção Hero (`Hero.tsx`)
+- **Arquivo final**: `public/images/hero-garden-premium.webp`
+- **URL original**: https://www.pexels.com/photo/lush-garden-with-greenery-and-manicured-lawn-38194805/
+- **Título**: Lush Garden with Greenery and Manicured Lawn
+- **Fotógrafo**: MAG Photography (Pexels ID: 38194805)
+- **Banco de imagens**: Pexels
+- **Licença**: Pexels License (Livre para uso comercial e pessoal, sem marca d'água, modificação permitida)
+- **Data de download**: 11/11/2026
+- **Aplicação visual**: Fotografia de destaque da seção Hero (`Hero.tsx`), retratando gramado verde impecavelmente cuidado e nivelado, cerca viva com trepadeiras ornamentais e copas arbóreas sob luz solar natural com contraste e profundidade cinematográfica.
+
+---
+
 ### 1. Seção: Serviços (`Services.tsx`)
 - **Arquivo final**: `public/images/background-jardim-servicos.webp`
 - **URL original**: https://www.pexels.com/photo/selective-focus-photography-of-green-leaves-1001916/

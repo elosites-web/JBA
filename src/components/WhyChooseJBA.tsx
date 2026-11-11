@@ -26,10 +26,10 @@ export const WhyChooseJBA: React.FC = () => {
             id="diferenciais-heading"
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4"
           >
-            Por Que Escolher a JBA
+            Atendimento direto e informações claras
           </h2>
           <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed">
-            Informações claras e verificáveis sobre a nossa forma de trabalhar.
+            Conheça como funciona o contato com a JBA.
           </p>
         </div>
 

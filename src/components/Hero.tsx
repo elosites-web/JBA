@@ -100,15 +100,15 @@ export const Hero: React.FC = () => {
             <div className="pt-4 border-t border-[#165C2A]/70 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
               <div className="flex items-center gap-2.5 bg-[#0e3b12]/60 p-2.5 rounded-lg border border-[#165C2A]/40">
                 <CheckCircle className="w-4 h-4 text-[#77D100] shrink-0" />
-                <span className="text-xs text-emerald-100/90 font-medium">Corte de grama, poda, piscinas e paisagismo</span>
+                <span className="text-xs text-emerald-100/90 font-medium">Avaliação presencial no imóvel</span>
               </div>
               <div className="flex items-center gap-2.5 bg-[#0e3b12]/60 p-2.5 rounded-lg border border-[#165C2A]/40">
                 <CheckCircle className="w-4 h-4 text-[#77D100] shrink-0" />
-                <span className="text-xs text-emerald-100/90 font-medium">Contato com Aristeu Barbosa</span>
+                <span className="text-xs text-emerald-100/90 font-medium">Atendimento direto com Aristeu</span>
               </div>
               <div className="flex items-center gap-2.5 bg-[#0e3b12]/60 p-2.5 rounded-lg border border-[#165C2A]/40">
                 <CheckCircle className="w-4 h-4 text-[#4FD0FF] shrink-0" />
-                <span className="text-xs text-emerald-100/90 font-medium">Atendimento em Jundiaí, SP</span>
+                <span className="text-xs text-emerald-100/90 font-medium">Atuação confirmada em Jundiaí</span>
               </div>
             </div>
 
@@ -194,7 +194,7 @@ export const Hero: React.FC = () => {
                   <span className="text-[11px] text-emerald-200/70">Jundiaí, SP</span>
                 </div>
                 <p className="text-xs text-emerald-100/90 leading-relaxed mb-3">
-                  Precisa de serviços de jardinagem, paisagismo ou limpeza de piscina? Envie uma mensagem para combinar uma visita de avaliação com o Aristeu.
+                  Precisa de manutenção no seu jardim, área verde ou piscina? Envie uma mensagem para solicitar uma avaliação presencial com Aristeu.
                 </p>
                 <a
                   href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento em Jundiaí.')}

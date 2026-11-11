@@ -27,10 +27,10 @@ export const HowItWorks: React.FC = () => {
             id="como-funciona-heading"
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0A2F0D] tracking-tight mb-4"
           >
-            Como Funciona o Atendimento
+            Da solicitação à avaliação do local
           </h2>
           <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
-            Sem complicações: processo direto e transparente do primeiro contato até a conclusão do serviço.
+            Entenda como funciona o atendimento antes da realização do serviço.
           </p>
         </div>
 

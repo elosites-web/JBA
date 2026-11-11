@@ -57,10 +57,10 @@ export const Gallery: React.FC = () => {
             id="galeria-heading"
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0A2F0D] tracking-tight mb-4"
           >
-            Referências Visuais dos Serviços
+            Referências visuais
           </h2>
           <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
-            Exemplos ilustrativos do padrão de cuidado para corte de grama com roçadeira, poda de plantas com tesourão, limpeza de piscinas e paisagismo em Jundiaí.
+            Veja referências ilustrativas relacionadas aos serviços de jardinagem, poda, paisagismo e limpeza de piscinas.
           </p>
         </div>
 

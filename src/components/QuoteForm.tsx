@@ -119,10 +119,10 @@ export const QuoteForm: React.FC = () => {
             id="orcamento-heading"
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0A2F0D] tracking-tight mb-4"
           >
-            Solicite uma visita para orçamento
+            Solicite uma visita para avaliação
           </h2>
           <p className="text-base text-neutral-600 leading-relaxed max-w-xl mx-auto">
-            Cada serviço é avaliado de acordo com as características do local. Preencha os dados abaixo para solicitar uma visita do Aristeu. Após avaliar o imóvel pessoalmente, ele apresentará o orçamento.
+            Informe seus dados e o serviço desejado para iniciar o contato com Aristeu. A avaliação presencial permite conhecer o local antes da elaboração do orçamento.
           </p>
         </div>
 

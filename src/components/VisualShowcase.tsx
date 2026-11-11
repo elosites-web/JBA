@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, Scissors, Waves } from 'lucide-react';
+import { Sparkles, Scissors, Waves, Trees } from 'lucide-react';
 import { buildWhatsAppLink } from '../config/siteConfig';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { ImageWithSkeleton } from './ImageWithSkeleton';
@@ -34,8 +34,7 @@ export const VisualShowcase: React.FC = () => {
     {
       category: 'Corte de Grama',
       title: 'Corte de Grama com Roçadeira',
-      description:
-        'Serviço de corte de grama com uso de roçadeira para a limpeza e o cuidado de áreas verdes em Jundiaí.',
+      description: 'Cuidado de áreas gramadas com utilização de roçadeira.',
       image: '/images/foto-gramado-amplo.webp',
       alt: 'Fotografia ilustrativa de corte de grama com roçadeira',
       icon: <Sparkles className="w-4 h-4 text-[#77D100]" />,
@@ -44,9 +43,8 @@ export const VisualShowcase: React.FC = () => {
     },
     {
       category: 'Poda de Plantas',
-      title: 'Poda de Plantas com Tesoura de Poda',
-      description:
-        'Poda manual de cercas vivas e folhagens utilizando tesourão de jardineiro e ferramentas de poda.',
+      title: 'Poda de Plantas',
+      description: 'Poda e alinhamento de plantas, arbustos e cercas vivas.',
       image: '/images/foto-cerca-viva.webp',
       alt: 'Fotografia ilustrativa de poda de plantas e cerca viva',
       icon: <Scissors className="w-4 h-4 text-[#77D100]" />,
@@ -56,13 +54,22 @@ export const VisualShowcase: React.FC = () => {
     {
       category: 'Limpeza de Piscinas',
       title: 'Limpeza de Piscinas',
-      description:
-        'Serviço de limpeza de piscinas para a remoção de resíduos, aspiração e higienização física da água.',
+      description: 'Serviço de limpeza de piscinas, conforme as necessidades do local.',
       image: '/images/foto-piscina-cristalina.webp',
       alt: 'Fotografia ilustrativa de serviço de limpeza de piscina',
       icon: <Waves className="w-4 h-4 text-[#4FD0FF]" />,
       whatsappMsg:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
+    },
+    {
+      category: 'Paisagismo',
+      title: 'Paisagismo',
+      description: 'Organização e valorização de áreas verdes com plantas ornamentais.',
+      image: '/images/foto-plantas-paisagismo.webp',
+      alt: 'Fotografia ilustrativa de plantas ornamentais e paisagismo',
+      icon: <Trees className="w-4 h-4 text-[#77D100]" />,
+      whatsappMsg:
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de paisagismo em Jundiaí.',
     },
   ];
 
@@ -96,18 +103,24 @@ export const VisualShowcase: React.FC = () => {
             Padrão de Cuidado
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
-            Atenção aos Detalhes no Seu Espaço
+            Cuidados para diferentes espaços
           </h2>
           <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed">
-            Fotografias profissionais de referência ilustrando os serviços oferecidos pela JBA para a manutenção da sua área externa em Jundiaí.
+            Conheça algumas referências visuais relacionadas aos serviços oferecidos pela JBA.
           </p>
         </div>
 
-        {/* 3 Large Visual Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* 4 Large Visual Feature Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {showcaseItems.map((item, index) => {
             const delayClass =
-              index === 1 ? 'reveal-delay-100' : index === 2 ? 'reveal-delay-200' : '';
+              index === 1
+                ? 'reveal-delay-100'
+                : index === 2
+                ? 'reveal-delay-200'
+                : index === 3
+                ? 'reveal-delay-300'
+                : '';
 
             return (
               <div

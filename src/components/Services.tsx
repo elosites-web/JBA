@@ -19,10 +19,10 @@ export const Services: React.FC = () => {
             id="servicos-heading"
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0A2F0D] tracking-tight mb-4"
           >
-            Serviços Especializados em Jundiaí
+            Serviços para jardins, áreas verdes e piscinas
           </h2>
           <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
-            Conheça abaixo os serviços prestados pela JBA em corte de grama, poda de plantas, limpeza de piscinas e paisagismo em Jundiaí.
+            Conheça as opções de cuidado e manutenção oferecidas pela JBA. Cada serviço é avaliado presencialmente para que o orçamento considere as características do espaço.
           </p>
         </div>
 

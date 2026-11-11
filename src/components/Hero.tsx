@@ -97,7 +97,7 @@ export const Hero: React.FC = () => {
             <div className="pt-4 border-t border-[#165C2A]/70 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
               <div className="flex items-center gap-2.5 bg-[#0e3b12]/60 p-2.5 rounded-lg border border-[#165C2A]/40">
                 <CheckCircle className="w-4 h-4 text-[#77D100] shrink-0" />
-                <span className="text-xs text-emerald-100/90 font-medium">Corte de grama, poda e piscinas</span>
+                <span className="text-xs text-emerald-100/90 font-medium">Corte de grama, poda, piscinas e paisagismo</span>
               </div>
               <div className="flex items-center gap-2.5 bg-[#0e3b12]/60 p-2.5 rounded-lg border border-[#165C2A]/40">
                 <CheckCircle className="w-4 h-4 text-[#77D100] shrink-0" />

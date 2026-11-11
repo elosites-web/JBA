@@ -1,5 +1,5 @@
 export interface ServiceItem {
-  id: 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas';
+  id: 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas' | 'paisagismo';
   title: string;
   shortTitle: string;
   description: string;
@@ -107,7 +107,7 @@ export const siteConfig: SiteConfig = {
   hero: {
     title: 'Jardinagem e limpeza de piscinas em Jundiaí.',
     subtitle:
-      'Conheça os serviços da JBA em corte de grama, poda de plantas e limpeza de piscinas. Solicite uma visita para avaliação e orçamento pelo WhatsApp.',
+      'Conheça os serviços da JBA em corte de grama, poda de plantas, limpeza de piscinas e paisagismo. Solicite uma visita para avaliação e orçamento pelo WhatsApp.',
     ctaText: 'Consultar visita e orçamento',
   },
   services: [
@@ -146,6 +146,18 @@ export const siteConfig: SiteConfig = {
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
+    },
+    {
+      id: 'paisagismo',
+      title: 'Paisagismo',
+      shortTitle: 'Paisagismo',
+      description:
+        'Serviços de paisagismo para valorizar e organizar áreas verdes, com avaliação presencial das características do espaço.',
+      image: '/images/foto-plantas-paisagismo.webp',
+      alt: 'Fotografia ilustrativa de plantas ornamentais e arranjo de paisagismo em área externa.',
+      ctaText: 'Solicitar avaliação',
+      whatsappMessage:
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de paisagismo em Jundiaí.',
     },
   ],
   gallery: [
@@ -249,9 +261,9 @@ export const siteConfig: SiteConfig = {
         'Serviços prestados na cidade de Jundiaí, SP.',
     },
     {
-      title: 'Três serviços em um único canal',
+      title: 'Quatro serviços em um único canal',
       description:
-        'Corte de grama com roçadeira, poda de plantas com tesourão de jardineiro e limpeza de piscinas.',
+        'Corte de grama com roçadeira, poda de plantas com tesourão de jardineiro, limpeza de piscinas e paisagismo.',
     },
     {
       title: 'Contato direto pelo WhatsApp com Aristeu Barbosa',
@@ -285,7 +297,7 @@ export const siteConfig: SiteConfig = {
     {
       question: 'Quais serviços posso solicitar à JBA?',
       answer:
-        'Você pode solicitar corte de grama com roçadeira, poda de plantas e cerca viva com tesourão de jardineiro, e limpeza de piscinas.',
+        'Você pode solicitar corte de grama com roçadeira, poda de plantas e cerca viva com tesourão de jardineiro, limpeza de piscinas e serviços de paisagismo.',
     },
     {
       question: 'Em qual cidade a JBA atende?',
@@ -295,7 +307,7 @@ export const siteConfig: SiteConfig = {
     {
       question: 'O que preciso informar ao solicitar uma visita?',
       answer:
-        'Informe qual serviço você necessita (corte de grama, poda de plantas ou limpeza de piscina), se desejar informe o bairro em Jundiaí e sua preferência de data e período para a visita de avaliação.',
+        'Informe qual serviço você necessita (corte de grama, poda de plantas, limpeza de piscina ou paisagismo), se desejar informe o bairro em Jundiaí e sua preferência de data e período para a visita de avaliação.',
     },
     {
       question: 'O que acontece depois da visita?',

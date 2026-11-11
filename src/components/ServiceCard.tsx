@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scissors, Sparkles, Waves } from 'lucide-react';
+import { Scissors, Sparkles, Waves, Trees } from 'lucide-react';
 import { ServiceItem, buildWhatsAppLink } from '../config/siteConfig';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { ImageWithSkeleton } from './ImageWithSkeleton';
@@ -21,11 +21,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
         return <Scissors className="w-5 h-5 text-[#77D100]" />;
       case 'limpeza-de-piscinas':
         return <Waves className="w-5 h-5 text-[#4FD0FF]" />;
+      case 'paisagismo':
+        return <Trees className="w-5 h-5 text-[#77D100]" />;
     }
   };
 
   const delayClass =
-    index === 1 ? 'reveal-delay-100' : index === 2 ? 'reveal-delay-200' : '';
+    index === 1 ? 'reveal-delay-100' : index === 2 ? 'reveal-delay-200' : index === 3 ? 'reveal-delay-300' : '';
 
   return (
     <div

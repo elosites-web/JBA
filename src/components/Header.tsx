@@ -134,7 +134,9 @@ export const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('servicos');
   const activeSectionRef = useRef<string>('servicos');
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const skipScrollRestoreRef = useRef(false);
+  const isScrollLockedRef = useRef(false);
+  const lockedScrollYRef = useRef(0);
+  const isNavigatingRef = useRef(false);
 
   // Exact navigation order matching actual page scroll sequence
   const navLinks = [
@@ -170,10 +172,12 @@ export const Header: React.FC = () => {
     }
 
     window.addEventListener('resize', updateHeaderHeight, { passive: true });
+    window.addEventListener('orientationchange', updateHeaderHeight, { passive: true });
 
     return () => {
       if (resizeObserver) resizeObserver.disconnect();
       window.removeEventListener('resize', updateHeaderHeight);
+      window.removeEventListener('orientationchange', updateHeaderHeight);
     };
   }, []);
 
@@ -262,18 +266,49 @@ export const Header: React.FC = () => {
     };
   }, [headerHeight]);
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-    menuButtonRef.current?.focus();
+  const lockBodyScroll = () => {
+    if (isScrollLockedRef.current) return;
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    lockedScrollYRef.current = scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+    isScrollLockedRef.current = true;
   };
 
-  // Close mobile drawer on Escape key and return focus
+  const unlockBodyScroll = (restoreScrollPosition: boolean) => {
+    if (!isScrollLockedRef.current) return;
+    isScrollLockedRef.current = false;
+    const scrollY = lockedScrollYRef.current;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    if (restoreScrollPosition) {
+      window.scrollTo(0, scrollY);
+    }
+  };
+
+  const closeMobileMenu = (restoreFocus = true) => {
+    setIsMobileMenuOpen(false);
+    unlockBodyScroll(true);
+    if (restoreFocus) {
+      menuButtonRef.current?.focus({ preventScroll: true });
+    }
+  };
+
+  // Close mobile drawer on Escape key and return focus without causing scroll
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        closeMobileMenu();
+        closeMobileMenu(true);
       }
     };
 
@@ -281,27 +316,11 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
 
-  // Reliable Mobile Page Scroll Lock with restoration of exact scroll position
+  // Reliable Mobile Page Scroll Lock with safe release
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
-    const scrollY = window.scrollY;
-    const originalStyles = {
-      position: document.body.style.position,
-      top: document.body.style.top,
-      left: document.body.style.left,
-      right: document.body.style.right,
-      overflow: document.body.style.overflow,
-      width: document.body.style.width,
-    };
-
-    // Lock page scroll securely without jumps
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
+    lockBodyScroll();
 
     // Prevent background touchmove gestures from scrolling underlying page
     const handleTouchMove = (e: TouchEvent) => {
@@ -314,49 +333,33 @@ export const Header: React.FC = () => {
 
     return () => {
       document.removeEventListener('touchmove', handleTouchMove);
-      // Restore previous inline styles
-      document.body.style.position = originalStyles.position;
-      document.body.style.top = originalStyles.top;
-      document.body.style.left = originalStyles.left;
-      document.body.style.right = originalStyles.right;
-      document.body.style.width = originalStyles.width;
-      document.body.style.overflow = originalStyles.overflow;
-
-      // Restore exact scroll position only if not navigating to a new anchor
-      if (!skipScrollRestoreRef.current) {
-        window.scrollTo(0, scrollY);
-      } else {
-        skipScrollRestoreRef.current = false;
-      }
+      unlockBodyScroll(false);
     };
   }, [isMobileMenuOpen]);
 
+  // Centralized single navigation execution path
   const handleNavClick = (href: string) => {
+    if (isNavigatingRef.current) return;
+    isNavigatingRef.current = true;
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 350);
+
     const id = href.replace('#', '');
     if (id) {
       activeSectionRef.current = id;
       setActiveSection(id);
     }
 
-    const isMobile = isMobileMenuOpen;
-    if (isMobile) {
-      skipScrollRestoreRef.current = true;
+    const wasMobileOpen = isMobileMenuOpen || isScrollLockedRef.current;
+    if (wasMobileOpen) {
       setIsMobileMenuOpen(false);
-      menuButtonRef.current?.focus();
-
-      // Synchronously release scroll lock so document coordinate space is accurate
-      const topStyle = document.body.style.top;
-      const scrollY = topStyle ? Math.abs(parseInt(topStyle, 10)) : window.scrollY;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      window.scrollTo(0, scrollY);
+      // Unlock body and restore normal scrolling coordinate system before measuring
+      unlockBodyScroll(true);
+      menuButtonRef.current?.focus({ preventScroll: true });
     }
 
-    // Precise geometric alignment: section top boundary aligns exactly with header bottom boundary
+    // Measure target and execute single smooth scroll in next frame once layout has settled
     requestAnimationFrame(() => {
       const target = document.querySelector<HTMLElement>(href);
       if (target) {
@@ -364,10 +367,10 @@ export const Header: React.FC = () => {
           headerHeightRef.current ||
           (headerRef.current ? headerRef.current.getBoundingClientRect().height : 80);
         const targetTop = target.getBoundingClientRect().top + window.scrollY;
-        const scrollPosition = targetTop - actualHeaderHeight;
+        const scrollPosition = Math.max(0, Math.round(targetTop - actualHeaderHeight));
 
         window.scrollTo({
-          top: Math.max(0, scrollPosition),
+          top: scrollPosition,
           behavior: 'smooth',
         });
 
@@ -385,10 +388,10 @@ export const Header: React.FC = () => {
         headerHeightRef.current ||
         (headerRef.current ? headerRef.current.getBoundingClientRect().height : 80);
       const targetTop = targetElement.getBoundingClientRect().top + window.scrollY;
-      const scrollPosition = targetTop - actualHeaderHeight;
+      const scrollPosition = Math.max(0, Math.round(targetTop - actualHeaderHeight));
 
       window.scrollTo({
-        top: Math.max(0, scrollPosition),
+        top: scrollPosition,
         behavior: smooth ? 'smooth' : 'auto',
       });
     };
@@ -438,11 +441,17 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Intercept any internal anchor links on the page (e.g. Hero CTA) for consistent exact alignment
+  // Intercept external internal anchor links on the page (e.g. Hero CTA) for consistent exact alignment
   useEffect(() => {
     const handleDocumentAnchorClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
       if (!anchor) return;
+
+      // Ignore links inside header or mobile drawer (they have their own direct React handler)
+      if (headerRef.current?.contains(anchor) || anchor.closest('#mobile-menu-drawer')) {
+        return;
+      }
+
       const href = anchor.getAttribute('href');
       if (!href || href === '#') return;
 
@@ -455,7 +464,7 @@ export const Header: React.FC = () => {
 
     document.addEventListener('click', handleDocumentAnchorClick);
     return () => document.removeEventListener('click', handleDocumentAnchorClick);
-  }, [isMobileMenuOpen]);
+  }, []);
 
   return (
     <>
@@ -479,6 +488,10 @@ export const Header: React.FC = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation();
+                if (isMobileMenuOpen) {
+                  closeMobileMenu(true);
+                }
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 if (window.history && window.history.pushState) {
                   window.history.pushState(null, '', window.location.pathname);
@@ -500,6 +513,7 @@ export const Header: React.FC = () => {
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleNavClick(link.href);
                     }}
                     aria-current={isActive ? 'location' : undefined}
@@ -560,7 +574,7 @@ export const Header: React.FC = () => {
         {isMobileMenuOpen && (
           <div
             id="mobile-menu-drawer"
-            className="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#0A2F0D]/98 via-[#0e3b12]/98 to-[#051a07]/98 backdrop-blur-xl border-b border-[#2B921D]/40 px-4 pt-3 pb-6 space-y-3.5 animate-in fade-in slide-in-from-top-3 duration-200 shadow-2xl z-50 max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain"
+            className="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#0A2F0D]/98 via-[#0e3b12]/98 to-[#051a07]/98 backdrop-blur-xl border-b border-[#2B921D]/40 px-4 pt-3 pb-6 space-y-3.5 animate-in fade-in slide-in-from-top-3 duration-200 shadow-2xl z-50 max-h-[calc(100vh-var(--jba-header-height,5rem))] max-h-[calc(100dvh-var(--jba-header-height,5rem))] overflow-y-auto overscroll-contain"
             role="region"
             aria-label="Menu móvel de navegação"
           >
@@ -573,6 +587,7 @@ export const Header: React.FC = () => {
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       handleNavClick(link.href);
                     }}
                     aria-current={isActive ? 'location' : undefined}
@@ -604,7 +619,7 @@ export const Header: React.FC = () => {
                 href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={closeMobileMenu}
+                onClick={() => closeMobileMenu(false)}
                 className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white font-bold shadow-lg shadow-emerald-950/50 transition-all text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100]"
               >
                 <WhatsAppIcon className="w-5 h-5 shrink-0" />
@@ -621,7 +636,7 @@ export const Header: React.FC = () => {
         createPortal(
           <div
             aria-hidden="true"
-            onClick={closeMobileMenu}
+            onClick={() => closeMobileMenu(true)}
             className="fixed inset-0 z-40 bg-[#051a07]/80 backdrop-blur-sm transition-opacity duration-300 animate-in fade-in"
           />,
           document.body

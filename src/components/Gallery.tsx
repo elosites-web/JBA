@@ -55,7 +55,7 @@ export const Gallery: React.FC = () => {
             Referências Visuais dos Serviços
           </h2>
           <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
-            Exemplos ilustrativos do padrão de cuidado para corte de grama com roçadeira, poda de plantas com tesourão e limpeza de piscinas em Jundiaí.
+            Exemplos ilustrativos do padrão de cuidado para corte de grama com roçadeira, poda de plantas com tesourão, limpeza de piscinas e paisagismo em Jundiaí.
           </p>
         </div>
 
@@ -168,7 +168,7 @@ export const Gallery: React.FC = () => {
         {/* Disclaimer below gallery */}
         <div className="mt-8 text-center reveal-on-scroll reveal-delay-200">
           <p className="text-xs text-neutral-500 italic max-w-xl mx-auto">
-            * Fotografias ilustrativas de banco de imagens para referência visual dos serviços de jardinagem e limpeza de piscinas oferecidos pela JBA em Jundiaí, SP.
+            * Fotografias ilustrativas de banco de imagens para referência visual dos serviços de jardinagem, limpeza de piscinas e paisagismo oferecidos pela JBA em Jundiaí, SP.
           </p>
         </div>
 

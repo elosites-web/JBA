@@ -22,12 +22,12 @@ export const Services: React.FC = () => {
             Serviços Especializados em Jundiaí
           </h2>
           <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
-            Conheça abaixo os serviços prestados pela JBA em corte de grama, poda de plantas e limpeza de piscinas em Jundiaí.
+            Conheça abaixo os serviços prestados pela JBA em corte de grama, poda de plantas, limpeza de piscinas e paisagismo em Jundiaí.
           </p>
         </div>
 
-        {/* 3 Services Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 4 Services Cards Grid: Mobile 1 col, Tablet 2 cols, Desktop 4 cols */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {siteConfig.services.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}

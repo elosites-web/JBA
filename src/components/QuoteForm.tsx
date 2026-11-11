@@ -21,6 +21,7 @@ export const QuoteForm: React.FC = () => {
     { id: 'Corte de grama (com roçadeira)', label: 'Corte de grama (com roçadeira)' },
     { id: 'Poda de plantas (com tesourão)', label: 'Poda de plantas (com tesourão)' },
     { id: 'Limpeza de piscinas', label: 'Limpeza de piscinas' },
+    { id: 'Paisagismo', label: 'Paisagismo' },
   ];
 
   const periodOptions = [

@@ -16,10 +16,10 @@ export const FAQ: React.FC = () => {
   return (
     <section
       id="faq"
-      className="py-16 md:py-24 bg-[#F7FAF6] text-neutral-900 border-b border-neutral-200"
+      className="section-subtle-bg section-bg-faq py-16 md:py-24 bg-[#F7FAF6] text-neutral-900 border-b border-neutral-200 overflow-hidden"
       aria-labelledby="faq-heading"
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 reveal-on-scroll">

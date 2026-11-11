@@ -7,10 +7,10 @@ export const ServiceArea: React.FC = () => {
   return (
     <section
       id="atendimento"
-      className="py-16 md:py-20 bg-white border-b border-neutral-200"
+      className="section-subtle-bg section-bg-atendimento py-16 md:py-20 bg-white border-b border-neutral-200 overflow-hidden"
       aria-labelledby="atendimento-heading"
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-gradient-to-br from-[#0A2F0D] to-[#165C2A] text-white p-8 sm:p-12 shadow-xl border border-[#2B921D]/30 relative overflow-hidden reveal-on-scroll">
           
           {/* Subtle background rings */}

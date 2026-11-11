@@ -104,10 +104,10 @@ export const QuoteForm: React.FC = () => {
   return (
     <section
       id="orcamento"
-      className="py-16 md:py-24 bg-white border-b border-neutral-200"
+      className="section-subtle-bg section-bg-orcamento py-16 md:py-24 bg-white border-b border-neutral-200 overflow-hidden"
       aria-labelledby="orcamento-heading"
     >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center mb-10 reveal-on-scroll">

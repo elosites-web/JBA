@@ -6,10 +6,10 @@ export const Services: React.FC = () => {
   return (
     <section
       id="servicos"
-      className="py-16 md:py-24 bg-[#F7FAF6] text-neutral-900 border-b border-neutral-200"
+      className="section-subtle-bg section-bg-servicos py-16 md:py-24 bg-[#F7FAF6] text-neutral-900 border-b border-neutral-200 overflow-hidden"
       aria-labelledby="servicos-heading"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#165C2A]/10 border border-[#2B921D]/30 text-[#165C2A] text-xs font-bold uppercase tracking-wider mb-3">

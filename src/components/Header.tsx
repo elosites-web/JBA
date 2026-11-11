@@ -126,6 +126,10 @@ const ScrollProgressBar: React.FC = React.memo(() => {
 ScrollProgressBar.displayName = 'ScrollProgressBar';
 
 export const Header: React.FC = () => {
+  const headerRef = useRef<HTMLElement>(null);
+  const headerBarRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState<number>(80);
+  const headerHeightRef = useRef<number>(80);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('servicos');
   const activeSectionRef = useRef<string>('servicos');
@@ -143,7 +147,37 @@ export const Header: React.FC = () => {
     { label: 'Solicitar Visita', href: '#orcamento' },
   ];
 
-  // High-precision, zero-churn Scroll Spy with persistent intersecting entries & improved rootMargin
+  // Single authoritative source of truth: measure actual sticky header rendered height and sync CSS variable
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (!headerRef.current) return;
+      const height = headerRef.current.getBoundingClientRect().height;
+      if (height > 0) {
+        document.documentElement.style.setProperty('--jba-header-height', `${height}px`);
+        headerHeightRef.current = height;
+        setHeaderHeight((prev) => (Math.abs(prev - height) > 0.5 ? height : prev));
+      }
+    };
+
+    updateHeaderHeight();
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined' && headerRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        updateHeaderHeight();
+      });
+      resizeObserver.observe(headerRef.current);
+    }
+
+    window.addEventListener('resize', updateHeaderHeight, { passive: true });
+
+    return () => {
+      if (resizeObserver) resizeObserver.disconnect();
+      window.removeEventListener('resize', updateHeaderHeight);
+    };
+  }, []);
+
+  // High-precision, zero-churn Scroll Spy driven by authoritative header height
   useEffect(() => {
     const sectionIds = ['servicos', 'destaques', 'galeria', 'como-funciona', 'diferenciais', 'faq', 'orcamento'];
     const elements = sectionIds
@@ -170,13 +204,13 @@ export const Header: React.FC = () => {
 
       if (intersectingMap.size === 0) return;
 
-      // Select the entry that best occupies the reading zone below the sticky header (88px)
+      // Select the entry that best occupies the reading zone below the sticky header
       let bestId = '';
       let minDistance = Infinity;
 
       intersectingMap.forEach((entry, id) => {
-        // Distance of section top from header bottom boundary (88px)
-        const topDistance = Math.abs(entry.boundingClientRect.top - 88);
+        // Distance of section top from header bottom boundary
+        const topDistance = Math.abs(entry.boundingClientRect.top - headerHeight);
         if (topDistance < minDistance) {
           minDistance = topDistance;
           bestId = id;
@@ -202,9 +236,7 @@ export const Header: React.FC = () => {
         updateActiveSectionFromEntries();
       },
       {
-        // -88px excludes sticky header (80px) + progress bar (3px) + buffer (5px)
-        // -50% focuses active detection strictly on the upper reading half of the viewport
-        rootMargin: '-88px 0px -50% 0px',
+        rootMargin: `-${headerHeight}px 0px -50% 0px`,
         threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0],
       }
     );
@@ -228,7 +260,7 @@ export const Header: React.FC = () => {
       window.removeEventListener('scroll', handleScrollOrResize);
       window.removeEventListener('resize', handleScrollOrResize);
     };
-  }, []);
+  }, [headerHeight]);
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -301,26 +333,38 @@ export const Header: React.FC = () => {
 
   const handleNavClick = (href: string) => {
     const id = href.replace('#', '');
-    activeSectionRef.current = id;
-    setActiveSection(id);
+    if (id) {
+      activeSectionRef.current = id;
+      setActiveSection(id);
+    }
 
     const isMobile = isMobileMenuOpen;
     if (isMobile) {
       skipScrollRestoreRef.current = true;
       setIsMobileMenuOpen(false);
       menuButtonRef.current?.focus();
+
+      // Synchronously release scroll lock so document coordinate space is accurate
+      const topStyle = document.body.style.top;
+      const scrollY = topStyle ? Math.abs(parseInt(topStyle, 10)) : window.scrollY;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, scrollY);
     }
 
-    // Allow DOM to unfreeze before calculating target bounding rect
+    // Precise geometric alignment: section top boundary aligns exactly with header bottom boundary
     requestAnimationFrame(() => {
-      const target = document.querySelector(href);
+      const target = document.querySelector<HTMLElement>(href);
       if (target) {
-        const header = document.querySelector('header');
-        const headerHeight = header ? header.getBoundingClientRect().height : 80;
-        const targetRect = target.getBoundingClientRect();
-        const targetTop = targetRect.top + window.pageYOffset;
-        // 12px breathing room so section title & badge are completely unobstructed
-        const scrollPosition = targetTop - headerHeight - 12;
+        const actualHeaderHeight =
+          headerHeightRef.current ||
+          (headerRef.current ? headerRef.current.getBoundingClientRect().height : 80);
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        const scrollPosition = targetTop - actualHeaderHeight;
 
         window.scrollTo({
           top: Math.max(0, scrollPosition),
@@ -334,9 +378,88 @@ export const Header: React.FC = () => {
     });
   };
 
+  // Support direct URL hash and browser history (popstate) navigation
+  useEffect(() => {
+    const scrollToTarget = (targetElement: HTMLElement, smooth = true) => {
+      const actualHeaderHeight =
+        headerHeightRef.current ||
+        (headerRef.current ? headerRef.current.getBoundingClientRect().height : 80);
+      const targetTop = targetElement.getBoundingClientRect().top + window.scrollY;
+      const scrollPosition = targetTop - actualHeaderHeight;
+
+      window.scrollTo({
+        top: Math.max(0, scrollPosition),
+        behavior: smooth ? 'smooth' : 'auto',
+      });
+    };
+
+    // On initial mount, if URL has a hash, align section exactly with sticky header bottom
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      const align = (smooth = false) => {
+        const target = document.querySelector<HTMLElement>(hash);
+        if (target) {
+          scrollToTarget(target, smooth);
+          const id = hash.replace('#', '');
+          activeSectionRef.current = id;
+          setActiveSection(id);
+        }
+      };
+
+      // Progressively realign as images, fonts, and responsive layout settle
+      const timer1 = setTimeout(() => align(false), 50);
+      const timer2 = setTimeout(() => align(false), 250);
+      const timer3 = setTimeout(() => align(false), 600);
+      const timer4 = setTimeout(() => align(false), 1200);
+
+      window.addEventListener('load', () => align(false), { once: true });
+
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+      };
+    }
+
+    const handlePopState = () => {
+      if (window.location.hash) {
+        const target = document.querySelector<HTMLElement>(window.location.hash);
+        if (target) {
+          scrollToTarget(target, true);
+          const id = window.location.hash.replace('#', '');
+          activeSectionRef.current = id;
+          setActiveSection(id);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Intercept any internal anchor links on the page (e.g. Hero CTA) for consistent exact alignment
+  useEffect(() => {
+    const handleDocumentAnchorClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') return;
+
+      const target = document.querySelector<HTMLElement>(href);
+      if (target) {
+        e.preventDefault();
+        handleNavClick(href);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentAnchorClick);
+    return () => document.removeEventListener('click', handleDocumentAnchorClick);
+  }, [isMobileMenuOpen]);
+
   return (
     <>
-      <header className="sticky top-0 z-50 w-full header-frosted-glass transition-all">
+      <header ref={headerRef} className="sticky top-0 z-50 w-full header-frosted-glass transition-all">
         {/* High-performance RAF scroll progress bar (zero Header re-renders on scroll) */}
         <ScrollProgressBar />
 
@@ -350,7 +473,7 @@ export const Header: React.FC = () => {
               'radial-gradient(ellipse 95% 140% at 50% 50%, transparent 60%, rgba(4, 18, 6, 0.20) 85%, rgba(2, 10, 3, 0.36) 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 100%)',
           }}
         >
-          <div className="flex items-center justify-between h-20 animate-header-fade-in">
+          <div ref={headerBarRef} className="flex items-center justify-between h-20 animate-header-fade-in">
             {/* Logo */}
             <a
               href="#"
@@ -437,7 +560,7 @@ export const Header: React.FC = () => {
         {isMobileMenuOpen && (
           <div
             id="mobile-menu-drawer"
-            className="lg:hidden bg-gradient-to-b from-[#0A2F0D]/98 via-[#0e3b12]/98 to-[#051a07]/98 backdrop-blur-xl border-b border-[#2B921D]/40 px-4 pt-3 pb-6 space-y-3.5 animate-in fade-in slide-in-from-top-3 duration-200 shadow-2xl relative z-50 max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain"
+            className="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#0A2F0D]/98 via-[#0e3b12]/98 to-[#051a07]/98 backdrop-blur-xl border-b border-[#2B921D]/40 px-4 pt-3 pb-6 space-y-3.5 animate-in fade-in slide-in-from-top-3 duration-200 shadow-2xl z-50 max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain"
             role="region"
             aria-label="Menu móvel de navegação"
           >

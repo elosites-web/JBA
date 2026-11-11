@@ -18,27 +18,8 @@ export const Footer: React.FC = () => {
     <footer className="bg-[#051a07] text-white border-t border-[#165C2A]/60 pt-10 pb-24 md:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Top bar with quick navigation back to top */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 mb-10 border-b border-[#165C2A]/40 text-center sm:text-left">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-[#77D100] animate-pulse" />
-            <span className="text-xs font-semibold text-emerald-100/90 tracking-wide">
-              JBA • Serviços Especializados em Jundiaí e Região
-            </span>
-          </div>
-
-          <button
-            type="button"
-            onClick={scrollToTop}
-            aria-label="Voltar ao início da página"
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0e3b12] hover:bg-[#165C2A] active:bg-[#0A2F0D] text-emerald-100 hover:text-white border border-[#2B921D]/50 hover:border-[#77D100] shadow-md hover:shadow-emerald-950/60 text-xs font-extrabold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] cursor-pointer"
-          >
-            <span>Voltar ao Topo</span>
-            <ChevronUp className="w-4 h-4 text-[#77D100] transition-transform duration-200 group-hover:-translate-y-1" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#165C2A]/40">
+        {/* Main Grid: Brand, Business Data & Quick Contact */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-10 border-b border-[#165C2A]/40">
           
           {/* Brand & Identity Column */}
           <div className="lg:col-span-5 space-y-4">
@@ -98,6 +79,26 @@ export const Footer: React.FC = () => {
             </a>
           </div>
 
+        </div>
+
+        {/* Bar with quick navigation back to top */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-b border-[#165C2A]/40 text-center sm:text-left">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-[#77D100] animate-pulse" />
+            <span className="text-xs font-semibold text-emerald-100/90 tracking-wide">
+              JBA • Serviços Especializados em Jundiaí e Região
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={scrollToTop}
+            aria-label="Voltar ao início da página"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0e3b12] hover:bg-[#165C2A] active:bg-[#0A2F0D] text-emerald-100 hover:text-white border border-[#2B921D]/50 hover:border-[#77D100] shadow-md hover:shadow-emerald-950/60 text-xs font-extrabold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] cursor-pointer"
+          >
+            <span>Voltar ao Topo</span>
+            <ChevronUp className="w-4 h-4 text-[#77D100] transition-transform duration-200 group-hover:-translate-y-1" />
+          </button>
         </div>
 
         {/* Legal, AI disclaimer & LGPD notes */}

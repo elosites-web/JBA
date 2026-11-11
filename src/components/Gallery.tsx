@@ -37,10 +37,10 @@ export const Gallery: React.FC = () => {
   return (
     <section
       id="galeria"
-      className="py-16 md:py-24 bg-white text-neutral-900 border-b border-neutral-200"
+      className="section-subtle-bg section-bg-galeria py-16 md:py-24 bg-white text-neutral-900 border-b border-neutral-200 overflow-hidden"
       aria-labelledby="galeria-heading"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 reveal-on-scroll">

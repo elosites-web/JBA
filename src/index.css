@@ -13,11 +13,12 @@
     --jba-blue-sky: #8FD3FF;
     --jba-yellow-light: #FFF6B0;
     --jba-bg-light: #F7FAF6;
+    --jba-header-height: 5rem;
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.75rem;
+    scroll-padding-top: var(--jba-header-height, 5rem);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     color: #1a202c;
     background-color: #F7FAF6;
@@ -53,10 +54,51 @@
   border-color: #2B921D;
 }
 
-/* Accessible scroll margin for sticky header offset */
-section[id] {
-  scroll-margin-top: 5.75rem;
+/* Subtle photographic section background utility with high-translucency white overlay */
+.section-subtle-bg {
+  position: relative;
+  background-image:
+    linear-gradient(
+      var(--section-overlay, rgba(255, 255, 255, 0.94)),
+      var(--section-overlay, rgba(255, 255, 255, 0.94))
+    ),
+    var(--section-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+/* Section-specific background utility classes */
+.section-bg-servicos {
+  --section-bg-image: url('/images/background-jardim-servicos.webp');
+  --section-overlay: rgba(247, 250, 246, 0.93);
+}
+
+.section-bg-como-funciona {
+  --section-bg-image: url('/images/background-gramado-processo.webp');
+  --section-overlay: rgba(255, 255, 255, 0.93);
+}
+
+.section-bg-galeria {
+  --section-bg-image: url('/images/background-agua-galeria.webp');
+  --section-overlay: rgba(255, 255, 255, 0.94);
+}
+
+.section-bg-atendimento {
+  --section-bg-image: url('/images/background-paisagem-atendimento.webp');
+  --section-overlay: rgba(255, 255, 255, 0.94);
+}
+
+.section-bg-faq {
+  --section-bg-image: url('/images/background-folhagens-faq.webp');
+  --section-overlay: rgba(247, 250, 246, 0.94);
+}
+
+.section-bg-orcamento {
+  --section-bg-image: url('/images/background-jardim-piscina-orcamento.webp');
+  --section-overlay: rgba(255, 255, 255, 0.94);
+}
+
 
 /* Premium Architectural Frosted Glass Header Material */
 .header-frosted-glass {

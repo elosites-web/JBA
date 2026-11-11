@@ -131,12 +131,14 @@ export const Header: React.FC = () => {
   const [headerHeight, setHeaderHeight] = useState<number>(80);
   const headerHeightRef = useRef<number>(80);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobileMenuOpenRef = useRef(false);
+  isMobileMenuOpenRef.current = isMobileMenuOpen;
   const [activeSection, setActiveSection] = useState<string>('servicos');
   const activeSectionRef = useRef<string>('servicos');
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const isScrollLockedRef = useRef(false);
-  const lockedScrollYRef = useRef(0);
   const isNavigatingRef = useRef(false);
+  const navigationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Exact navigation order matching actual page scroll sequence
   const navLinks = [
@@ -181,24 +183,21 @@ export const Header: React.FC = () => {
     };
   }, []);
 
-  // High-precision, zero-churn Scroll Spy driven by authoritative header height
+  // High-precision, deterministic Scroll Spy driven by authoritative header height
+  // Automatically paused when mobile menu is open or during programmatic navigation
   useEffect(() => {
     const sectionIds = ['servicos', 'destaques', 'galeria', 'como-funciona', 'diferenciais', 'faq', 'orcamento'];
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
 
-    if (elements.length === 0) return;
+    const calculateActiveSection = () => {
+      // Never override user selection while mobile menu is open or during programmatic smooth scrolling
+      if (isMobileMenuOpenRef.current || isNavigatingRef.current) return;
 
-    // Track active intersecting entries across ticks to prevent dropped state during fast scrolls
-    const intersectingMap = new Map<string, IntersectionObserverEntry>();
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
 
-    const updateActiveSectionFromEntries = () => {
-      // Check if user has scrolled to the bottom of the page (highlights final 'orcamento' section)
-      const isAtBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
-
-      if (isAtBottom) {
+      // Bottom of page detection (highlights 'orcamento')
+      if (windowHeight + scrollY >= docHeight - 80) {
         if (activeSectionRef.current !== 'orcamento') {
           activeSectionRef.current = 'orcamento';
           setActiveSection('orcamento');
@@ -206,97 +205,73 @@ export const Header: React.FC = () => {
         return;
       }
 
-      if (intersectingMap.size === 0) return;
-
-      // Select the entry that best occupies the reading zone below the sticky header
-      let bestId = '';
-      let minDistance = Infinity;
-
-      intersectingMap.forEach((entry, id) => {
-        // Distance of section top from header bottom boundary
-        const topDistance = Math.abs(entry.boundingClientRect.top - headerHeight);
-        if (topDistance < minDistance) {
-          minDistance = topDistance;
-          bestId = id;
+      // Very top of page (Hero area before 'servicos')
+      if (scrollY < 200) {
+        if (activeSectionRef.current !== 'servicos') {
+          activeSectionRef.current = 'servicos';
+          setActiveSection('servicos');
         }
-      });
+        return;
+      }
 
-      if (bestId && bestId !== activeSectionRef.current) {
-        activeSectionRef.current = bestId;
-        setActiveSection(bestId);
+      // Detection line right below sticky header
+      const currentHeaderHeight =
+        headerHeightRef.current || (headerRef.current?.getBoundingClientRect().height ?? 80);
+      const detectionLine = currentHeaderHeight + 70;
+
+      let matchedId = '';
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= detectionLine && rect.bottom > currentHeaderHeight) {
+          matchedId = id;
+          break;
+        }
+      }
+
+      if (matchedId && matchedId !== activeSectionRef.current) {
+        activeSectionRef.current = matchedId;
+        setActiveSection(matchedId);
       }
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            intersectingMap.set(entry.target.id, entry);
-          } else {
-            intersectingMap.delete(entry.target.id);
-          }
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          calculateActiveSection();
+          ticking = false;
         });
-
-        updateActiveSectionFromEntries();
-      },
-      {
-        rootMargin: `-${headerHeight}px 0px -50% 0px`,
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0],
-      }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-
-    // Handle scroll/resize events for bottom-of-page detection
-    const handleScrollOrResize = () => {
-      const isAtBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
-      if (isAtBottom && activeSectionRef.current !== 'orcamento') {
-        activeSectionRef.current = 'orcamento';
-        setActiveSection('orcamento');
       }
     };
-    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
-    window.addEventListener('resize', handleScrollOrResize, { passive: true });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    calculateActiveSection();
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScrollOrResize);
-      window.removeEventListener('resize', handleScrollOrResize);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
     };
   }, [headerHeight]);
 
   const lockBodyScroll = () => {
     if (isScrollLockedRef.current) return;
-    const scrollY = window.scrollY || window.pageYOffset || 0;
-    lockedScrollYRef.current = scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
     isScrollLockedRef.current = true;
   };
 
-  const unlockBodyScroll = (restoreScrollPosition: boolean) => {
+  const unlockBodyScroll = () => {
     if (!isScrollLockedRef.current) return;
     isScrollLockedRef.current = false;
-    const scrollY = lockedScrollYRef.current;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
     document.body.style.overflow = '';
-    if (restoreScrollPosition) {
-      window.scrollTo(0, scrollY);
-    }
   };
 
   const closeMobileMenu = (restoreFocus = true) => {
     setIsMobileMenuOpen(false);
-    unlockBodyScroll(true);
+    unlockBodyScroll();
     if (restoreFocus) {
       menuButtonRef.current?.focus({ preventScroll: true });
     }
@@ -316,47 +291,37 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
 
-  // Reliable Mobile Page Scroll Lock with safe release
+  // Mobile scroll lock while menu is open
   useEffect(() => {
-    if (!isMobileMenuOpen) return;
-
-    lockBodyScroll();
-
-    // Prevent background touchmove gestures from scrolling underlying page
-    const handleTouchMove = (e: TouchEvent) => {
-      const drawer = document.getElementById('mobile-menu-drawer');
-      if (drawer && !drawer.contains(e.target as Node)) {
-        e.preventDefault();
-      }
-    };
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    if (isMobileMenuOpen) {
+      lockBodyScroll();
+    } else {
+      unlockBodyScroll();
+    }
 
     return () => {
-      document.removeEventListener('touchmove', handleTouchMove);
-      unlockBodyScroll(false);
+      unlockBodyScroll();
     };
   }, [isMobileMenuOpen]);
 
   // Centralized single navigation execution path
   const handleNavClick = (href: string) => {
-    if (isNavigatingRef.current) return;
-    isNavigatingRef.current = true;
-    setTimeout(() => {
-      isNavigatingRef.current = false;
-    }, 350);
-
     const id = href.replace('#', '');
     if (id) {
       activeSectionRef.current = id;
       setActiveSection(id);
     }
 
-    const wasMobileOpen = isMobileMenuOpen || isScrollLockedRef.current;
-    if (wasMobileOpen) {
+    // Set navigating flag to prevent scroll spy overrides during smooth scrolling
+    isNavigatingRef.current = true;
+    if (navigationTimerRef.current) clearTimeout(navigationTimerRef.current);
+    navigationTimerRef.current = setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 1200);
+
+    if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
-      // Unlock body and restore normal scrolling coordinate system before measuring
-      unlockBodyScroll(true);
-      menuButtonRef.current?.focus({ preventScroll: true });
+      unlockBodyScroll();
     }
 
     // Measure target and execute single smooth scroll in next frame once layout has settled
@@ -559,50 +524,63 @@ export const Header: React.FC = () => {
                 ref={menuButtonRef}
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 sm:p-2.5 rounded-xl text-emerald-100 hover:text-white bg-[#165C2A]/50 hover:bg-[#165C2A] border border-[#2B921D]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] cursor-pointer"
+                className={`p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] ${
+                  isMobileMenuOpen
+                    ? 'bg-[#165C2A] text-white border-[#77D100]/60 shadow-inner'
+                    : 'bg-[#165C2A]/50 hover:bg-[#165C2A] text-emerald-100 hover:text-white border-[#2B921D]/40'
+                }`}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu-drawer"
                 aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
               >
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <span className={`inline-flex items-center justify-center transition-transform duration-300 ease-out ${isMobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}>
+                  {isMobileMenuOpen ? <X className="w-5 h-5 text-[#77D100]" /> : <Menu className="w-5 h-5" />}
+                </span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Drawer Menu with frosted glass style */}
-        {isMobileMenuOpen && (
-          <div
-            id="mobile-menu-drawer"
-            className="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#0A2F0D]/98 via-[#0e3b12]/98 to-[#051a07]/98 backdrop-blur-xl border-b border-[#2B921D]/40 px-4 pt-3 pb-6 space-y-3.5 animate-in fade-in slide-in-from-top-3 duration-200 shadow-2xl z-50 max-h-[calc(100vh-var(--jba-header-height,5rem))] max-h-[calc(100dvh-var(--jba-header-height,5rem))] overflow-y-auto overscroll-contain"
-            role="region"
-            aria-label="Menu móvel de navegação"
-          >
-            <div className="flex flex-col space-y-1.5">
+        {/* Mobile Drawer Menu with smooth vertical collapse */}
+        <div
+          id="mobile-menu-drawer"
+          role="region"
+          aria-label="Menu móvel de navegação"
+          aria-hidden={!isMobileMenuOpen}
+          className={`mobile-drawer-collapse ${isMobileMenuOpen ? 'is-open' : ''} lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#0A2F0D]/98 via-[#0e3b12]/98 to-[#051a07]/98 backdrop-blur-xl border-b border-[#2B921D]/40 shadow-2xl z-50`}
+        >
+          <div className="mobile-drawer-content max-h-[calc(100vh-var(--jba-header-height,5rem))] max-h-[calc(100dvh-var(--jba-header-height,5rem))] overflow-y-auto overscroll-contain px-4 pt-3 pb-6 space-y-3.5">
+            <div className="flex flex-col space-y-1.5" role="menu">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.replace('#', '');
                 return (
                   <a
                     key={link.href}
                     href={link.href}
+                    role="menuitem"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       handleNavClick(link.href);
                     }}
                     aria-current={isActive ? 'location' : undefined}
-                    className={`flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] ${
+                    className={`mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] ${
                       isActive
-                        ? 'bg-[#165C2A] text-[#77D100] border border-[#77D100]/40 shadow-sm font-bold'
-                        : 'text-emerald-100 hover:bg-[#165C2A]/60 hover:text-white'
+                        ? 'bg-[#165C2A] text-[#77D100] border-l-4 border-l-[#77D100] border-t border-r border-b border-[#77D100]/40 shadow-sm font-bold pl-3'
+                        : 'text-emerald-100 hover:bg-[#165C2A]/60 hover:text-white border border-transparent'
                     }`}
                   >
                     <span>{link.label}</span>
                     {isActive && (
-                      <span
-                        aria-hidden="true"
-                        className="w-2 h-2 rounded-full bg-[#77D100] shadow-sm shadow-[#77D100]"
-                      />
+                      <span className="flex items-center gap-1.5">
+                        <span className="text-[10px] uppercase font-bold tracking-wider text-[#77D100]/90">
+                          Atual
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="w-2.5 h-2.5 rounded-full bg-[#77D100] shadow-[0_0_8px_#77D100]"
+                        />
+                      </span>
                     )}
                   </a>
                 );
@@ -627,17 +605,18 @@ export const Header: React.FC = () => {
               </a>
             </div>
           </div>
-        )}
+        </div>
       </header>
 
-      {/* Full-Screen Opaque Backdrop (z-40) rendered via Portal on body to cover entire viewport */}
-      {isMobileMenuOpen &&
-        typeof document !== 'undefined' &&
+      {/* Full-Screen Opaque Backdrop with smooth fade rendered via Portal */}
+      {typeof document !== 'undefined' &&
         createPortal(
           <div
             aria-hidden="true"
             onClick={() => closeMobileMenu(true)}
-            className="fixed inset-0 z-40 bg-[#051a07]/80 backdrop-blur-sm transition-opacity duration-300 animate-in fade-in"
+            className={`fixed inset-0 z-40 bg-[#051a07]/80 backdrop-blur-sm transition-opacity duration-300 ${
+              isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}
           />,
           document.body
         )}

@@ -176,7 +176,7 @@ export const Gallery: React.FC = () => {
         {/* Disclaimer below gallery */}
         <div className="mt-8 text-center reveal-on-scroll reveal-delay-200">
           <p className="text-xs text-neutral-500 italic max-w-xl mx-auto">
-            * Fotografias ilustrativas de banco de imagens para referência visual dos serviços de jardinagem, limpeza de piscinas e paisagismo oferecidos pela JBA em Jundiaí, SP.
+            * Fotografias ilustrativas de banco de imagens para referência visual dos serviços de jardinagem, paisagismo e limpeza de piscinas oferecidos pela JBA em Jundiaí, SP.
           </p>
         </div>
 

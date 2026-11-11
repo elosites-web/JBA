@@ -92,8 +92,8 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   brand: {
     name: 'JBA',
-    fullName: 'JBA — Serviço de Jardinagem e Limpeza de Piscinas',
-    shortName: 'JBA Jardinagem e Piscinas',
+    fullName: 'JBA — Serviço de Jardinagem, Paisagismo e Limpeza de Piscinas',
+    shortName: 'JBA Jardinagem, Paisagismo e Piscinas',
     responsiblePerson: 'Aristeu Barbosa',
     city: 'Jundiaí',
     state: 'SP',
@@ -107,9 +107,9 @@ export const siteConfig: SiteConfig = {
     faviconUrl: '/images/favicon-512x512.png',
   },
   hero: {
-    title: 'Jardinagem e limpeza de piscinas em Jundiaí.',
+    title: 'Jardinagem, paisagismo e limpeza de piscinas em Jundiaí.',
     subtitle:
-      'Conheça os serviços da JBA em corte de grama, poda de plantas, limpeza de piscinas e paisagismo. Solicite uma visita para avaliação e orçamento pelo WhatsApp.',
+      'A JBA oferece serviços de jardinagem, paisagismo e limpeza de piscinas em Jundiaí, SP.',
     ctaText: 'Consultar visita e orçamento',
   },
   services: [
@@ -303,7 +303,7 @@ export const siteConfig: SiteConfig = {
   ],
   serviceArea: {
     title: 'Atendimento em Jundiaí',
-    text: 'A JBA oferece serviços de jardinagem e limpeza de piscinas em Jundiaí, SP.',
+    text: 'A JBA oferece serviços de jardinagem, paisagismo e limpeza de piscinas em Jundiaí, SP.',
     ctaText: 'Consultar visita e orçamento',
     whatsappMessage:
       'Olá, Aristeu! Gostaria de consultar a disponibilidade para uma visita de avaliação em Jundiaí.',
@@ -346,7 +346,7 @@ export const siteConfig: SiteConfig = {
     },
   ],
   finalCta: {
-    title: 'Vamos conversar sobre seu jardim ou piscina?',
+    title: 'Vamos conversar sobre seu jardim, paisagismo ou piscina?',
     text: 'Entre em contato com a JBA e solicite uma visita para avaliação e orçamento do serviço que você procura em Jundiaí.',
     ctaText: 'Solicitar visita no WhatsApp',
     whatsappMessage:

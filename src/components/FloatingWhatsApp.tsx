@@ -43,20 +43,20 @@ export const FloatingWhatsApp: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Solicitar visita para orçamento no WhatsApp"
-        className="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:bg-[#1caa4f] text-white shadow-2xl shadow-emerald-950/50 hover:scale-110 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
+        className="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full jba-floating-whatsapp text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100] cursor-pointer"
       >
-        {/* Subtle pulse wave */}
-        <span
-          className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none duration-1000"
-          aria-hidden="true"
-        />
+        {/* Subtle gradient-matched pulse wave */}
+        <span className="jba-whatsapp-pulse" aria-hidden="true" />
 
-        <WhatsAppIcon className="w-8 h-8 sm:w-9 sm:h-9 relative z-10" />
+        {/* Tactile inner glossy highlight reflection */}
+        <span className="jba-whatsapp-highlight" aria-hidden="true" />
+
+        <WhatsAppIcon className="w-8 h-8 sm:w-9 sm:h-9 relative z-10 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]" />
 
         {/* Hover / focus tooltip for desktop */}
         <span
           role="tooltip"
-          className="absolute right-full mr-3 hidden sm:group-hover:flex items-center whitespace-nowrap rounded-lg bg-[#0A2F0D] px-3 py-1.5 text-xs font-bold text-white shadow-lg border border-[#165C2A] transition-opacity"
+          className="absolute right-full mr-3 hidden sm:group-hover:flex items-center whitespace-nowrap rounded-lg bg-[#0A2F0D] px-3 py-1.5 text-xs font-bold text-white shadow-lg border border-[#165C2A] transition-opacity pointer-events-none"
         >
           Solicitar visita no WhatsApp
         </span>

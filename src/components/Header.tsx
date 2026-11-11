@@ -498,7 +498,7 @@ export const Header: React.FC = () => {
                 }
               }}
               className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] rounded-lg p-1"
-              aria-label="JBA Jardinagem e Piscinas - Início"
+              aria-label={`${siteConfig.brand.shortName} - Início`}
             >
               <BrandLogo height={52} />
             </a>

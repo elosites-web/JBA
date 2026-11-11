@@ -1,12 +1,12 @@
-# JBA — Jardinagem e Limpeza de Piscinas (Jundiaí - SP)
+# JBA — Jardinagem, Paisagismo e Limpeza de Piscinas (Jundiaí - SP)
 
-Landing page institucional de alta conversão desenvolvida para a **JBA — Serviço de Jardinagem e Limpeza de Piscinas**, com foco em gerar solicitações de orçamento via WhatsApp.
+Landing page institucional de alta conversão desenvolvida para a **JBA — Serviço de Jardinagem, Paisagismo e Limpeza de Piscinas**, com foco em gerar solicitações de orçamento via WhatsApp.
 
 ---
 
 ## 📌 Informações da Empresa no Site
 
-- **Marca:** JBA — Serviço de Jardinagem e Limpeza de Piscinas
+- **Marca:** JBA — Serviço de Jardinagem, Paisagismo e Limpeza de Piscinas
 - **Responsável:** Aristeu Barbosa
 - **Cidade:** Jundiaí, SP
 - **Telefone / WhatsApp:** (11) 97702-1656

@@ -194,7 +194,7 @@ export const Hero: React.FC = () => {
                   <span className="text-[11px] text-emerald-200/70">Jundiaí, SP</span>
                 </div>
                 <p className="text-xs text-emerald-100/90 leading-relaxed mb-3">
-                  Precisa de manutenção no jardim ou na piscina? Envie uma mensagem para combinar uma visita de avaliação com o Aristeu.
+                  Precisa de serviços de jardinagem, paisagismo ou limpeza de piscina? Envie uma mensagem para combinar uma visita de avaliação com o Aristeu.
                 </p>
                 <a
                   href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento em Jundiaí.')}

@@ -40,11 +40,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
       {/* 4:3 Aspect Ratio Image with Structured Skeleton State */}
       <ImageWithSkeleton
         src={service.image}
+        srcSet={service.srcSet}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         alt={service.alt}
         theme="light"
         containerClassName="aspect-[4/3]"
         className="transition-all duration-700 ease-out group-hover:scale-105"
         loading="lazy"
+        decoding="async"
         width="600"
         height="450"
       >

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Maximize2, Sparkles, Scissors, Waves, Image as ImageIcon } from 'lucide-react';
+import { Maximize2, Sparkles, Scissors, Waves, Trees, Image as ImageIcon } from 'lucide-react';
 import { siteConfig, GalleryItem } from '../config/siteConfig';
 import { GalleryModal } from './GalleryModal';
 import { ImageWithSkeleton } from './ImageWithSkeleton';
 
-type CategoryFilter = 'todos' | 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas';
+type CategoryFilter = 'todos' | 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas' | 'paisagismo';
 
 export const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('todos');
@@ -26,6 +26,11 @@ export const Gallery: React.FC = () => {
       id: 'limpeza-de-piscinas',
       label: 'Limpeza de Piscinas',
       icon: <Waves className="w-3.5 h-3.5 text-[#4FD0FF]" />,
+    },
+    {
+      id: 'paisagismo',
+      label: 'Paisagismo',
+      icon: <Trees className="w-3.5 h-3.5 text-[#77D100]" />,
     },
   ];
 
@@ -113,11 +118,14 @@ export const Gallery: React.FC = () => {
                 {/* 4:3 Aspect Ratio Image with Structured Skeleton State */}
                 <ImageWithSkeleton
                   src={item.image}
+                  srcSet={item.srcSet}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt={item.alt}
                   theme="light"
                   containerClassName="aspect-[4/3]"
                   className="transition-all duration-500 group-hover:scale-105"
                   loading="lazy"
+                  decoding="async"
                   width="600"
                   height="450"
                 >

@@ -133,6 +133,8 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
         <img
           src={src}
           alt={alt}
+          loading={imgProps.loading || 'lazy'}
+          decoding={imgProps.decoding || 'async'}
           onLoad={(e) => {
             setIsLoaded(true);
             onLoad?.(e);

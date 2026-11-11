@@ -4,6 +4,7 @@ export interface ServiceItem {
   shortTitle: string;
   description: string;
   image: string;
+  srcSet?: string;
   alt: string;
   ctaText: string;
   whatsappMessage: string;
@@ -12,9 +13,10 @@ export interface ServiceItem {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas';
+  category: 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas' | 'paisagismo';
   categoryLabel: string;
   image: string;
+  srcSet?: string;
   alt: string;
   description: string;
   whatsappMessage: string;
@@ -118,6 +120,8 @@ export const siteConfig: SiteConfig = {
       description:
         'Cuidado com a grama e a vegetação do seu espaço, utilizando roçadeira.',
       image: '/images/foto-corte-grama.webp',
+      srcSet:
+        '/images/foto-corte-grama-400w.webp 400w, /images/foto-corte-grama-800w.webp 800w, /images/foto-corte-grama.webp 1200w',
       alt: 'Fotografia ilustrativa de corte de grama com roçadeira.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
@@ -130,6 +134,8 @@ export const siteConfig: SiteConfig = {
       description:
         'Poda e cuidado de plantas e vegetação com tesourão de jardineiro.',
       image: '/images/foto-poda-plantas.webp',
+      srcSet:
+        '/images/foto-poda-plantas-400w.webp 400w, /images/foto-poda-plantas-800w.webp 800w, /images/foto-poda-plantas.webp 1200w',
       alt: 'Fotografia ilustrativa de poda de plantas com tesourão de jardineiro.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
@@ -142,6 +148,8 @@ export const siteConfig: SiteConfig = {
       description:
         'Serviço de limpeza de piscinas. Consulte os detalhes diretamente pelo WhatsApp.',
       image: '/images/foto-limpeza-piscina.webp',
+      srcSet:
+        '/images/foto-limpeza-piscina-400w.webp 400w, /images/foto-limpeza-piscina-800w.webp 800w, /images/foto-limpeza-piscina.webp 1200w',
       alt: 'Fotografia ilustrativa de piscina limpa com água tratada.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
@@ -154,6 +162,8 @@ export const siteConfig: SiteConfig = {
       description:
         'Serviços de paisagismo para valorizar e organizar áreas verdes, com avaliação presencial das características do espaço.',
       image: '/images/foto-plantas-paisagismo.webp',
+      srcSet:
+        '/images/foto-plantas-paisagismo-400w.webp 400w, /images/foto-plantas-paisagismo-800w.webp 800w, /images/foto-plantas-paisagismo.webp 1200w',
       alt: 'Fotografia ilustrativa de plantas ornamentais e arranjo de paisagismo em área externa.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
@@ -167,6 +177,8 @@ export const siteConfig: SiteConfig = {
       category: 'corte-de-grama',
       categoryLabel: 'Corte de Grama',
       image: '/images/foto-corte-grama.webp',
+      srcSet:
+        '/images/foto-corte-grama-400w.webp 400w, /images/foto-corte-grama-800w.webp 800w, /images/foto-corte-grama.webp 1200w',
       alt: 'Fotografia ilustrativa de corte de grama em área ajardinada.',
       description:
         'Cuidado e corte de grama com roçadeira em áreas ajardinadas.',
@@ -179,6 +191,8 @@ export const siteConfig: SiteConfig = {
       category: 'poda-de-plantas',
       categoryLabel: 'Poda de Plantas',
       image: '/images/foto-poda-plantas.webp',
+      srcSet:
+        '/images/foto-poda-plantas-400w.webp 400w, /images/foto-poda-plantas-800w.webp 800w, /images/foto-poda-plantas.webp 1200w',
       alt: 'Fotografia ilustrativa de poda de plantas com tesourão de jardineiro.',
       description:
         'Poda e alinhamento de plantas, arbustos e cerca viva com tesourão de jardineiro.',
@@ -191,6 +205,8 @@ export const siteConfig: SiteConfig = {
       category: 'limpeza-de-piscinas',
       categoryLabel: 'Limpeza de Piscina',
       image: '/images/foto-limpeza-piscina.webp',
+      srcSet:
+        '/images/foto-limpeza-piscina-400w.webp 400w, /images/foto-limpeza-piscina-800w.webp 800w, /images/foto-limpeza-piscina.webp 1200w',
       alt: 'Fotografia ilustrativa de piscina limpa com tratamento de água.',
       description:
         'Limpeza e aspiração de piscinas com equipamentos adequados.',
@@ -232,6 +248,20 @@ export const siteConfig: SiteConfig = {
         'Serviço de limpeza periódica de piscinas residenciais.',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
+    },
+    {
+      id: 'galeria-paisagismo-1',
+      title: 'Arranjos e Paisagismo',
+      category: 'paisagismo',
+      categoryLabel: 'Paisagismo',
+      image: '/images/foto-plantas-paisagismo.webp',
+      srcSet:
+        '/images/foto-plantas-paisagismo-400w.webp 400w, /images/foto-plantas-paisagismo-800w.webp 800w, /images/foto-plantas-paisagismo.webp 1200w',
+      alt: 'Fotografia ilustrativa de plantas ornamentais e arranjo de paisagismo em área externa.',
+      description:
+        'Referência visual para organização e valorização de áreas verdes com plantas ornamentais.',
+      whatsappMessage:
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de paisagismo em Jundiaí.',
     },
   ],
   howItWorks: [

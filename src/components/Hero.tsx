@@ -14,9 +14,12 @@ export const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img
           src="/images/hero-garden-premium.webp"
+          srcSet="/images/hero-garden-premium-800w.webp 800w, /images/hero-garden-premium-1600w.webp 1600w, /images/hero-garden-premium.webp 2400w"
+          sizes="100vw"
           alt="Jardim residencial bem cuidado com gramado viçoso e folhagens ornamentais"
           className="w-full h-full object-cover object-[50%_center] sm:object-[60%_35%] transform scale-105 transition-transform duration-1000"
           loading="eager"
+          decoding="async"
           fetchPriority="high"
           width="2400"
           height="1600"
@@ -114,46 +117,72 @@ export const Hero: React.FC = () => {
           {/* Hero Visual Card */}
           <div className="lg:col-span-5 reveal-on-scroll reveal-delay-200">
             <div className="relative rounded-2xl p-4 sm:p-5 bg-gradient-to-b from-[#165C2A]/60 to-[#0A2F0D] border border-[#2B921D]/40 shadow-2xl">
-              <div className="grid grid-cols-3 gap-2.5 mb-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2 sm:gap-2.5 mb-4">
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/foto-corte-grama.webp"
+                    src="/images/foto-corte-grama-400w.webp"
+                    srcSet="/images/foto-corte-grama-400w.webp 400w, /images/foto-corte-grama-800w.webp 800w, /images/foto-corte-grama.webp 1200w"
+                    sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
                     alt="Corte de grama com roçadeira"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
+                    decoding="async"
                     width="400"
                     height="300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-1.5 z-10">
-                    <span className="text-[10px] font-bold text-white leading-tight">Corte de Grama</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
+                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Corte de Grama</span>
                   </div>
                 </div>
 
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/foto-poda-plantas.webp"
+                    src="/images/foto-poda-plantas-400w.webp"
+                    srcSet="/images/foto-poda-plantas-400w.webp 400w, /images/foto-poda-plantas-800w.webp 800w, /images/foto-poda-plantas.webp 1200w"
+                    sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
                     alt="Poda de plantas com tesourão"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
+                    decoding="async"
                     width="400"
                     height="300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-1.5 z-10">
-                    <span className="text-[10px] font-bold text-white leading-tight">Poda de Plantas</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
+                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Poda de Plantas</span>
                   </div>
                 </div>
 
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#0A84C9]/50 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/foto-limpeza-piscina.webp"
+                    src="/images/foto-limpeza-piscina-400w.webp"
+                    srcSet="/images/foto-limpeza-piscina-400w.webp 400w, /images/foto-limpeza-piscina-800w.webp 800w, /images/foto-limpeza-piscina.webp 1200w"
+                    sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
                     alt="Limpeza de piscinas"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
+                    decoding="async"
                     width="400"
                     height="300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-1.5 z-10">
-                    <span className="text-[10px] font-bold text-white leading-tight">Limpeza de Piscina</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
+                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Limpeza de Piscina</span>
+                  </div>
+                </div>
+
+                <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
+                  <img
+                    src="/images/foto-plantas-paisagismo-400w.webp"
+                    srcSet="/images/foto-plantas-paisagismo-400w.webp 400w, /images/foto-plantas-paisagismo-800w.webp 800w, /images/foto-plantas-paisagismo.webp 1200w"
+                    sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
+                    alt="Paisagismo e plantas ornamentais"
+                    className="w-full h-full object-cover transition-opacity duration-300"
+                    loading="eager"
+                    decoding="async"
+                    width="400"
+                    height="300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
+                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Paisagismo</span>
                   </div>
                 </div>
               </div>

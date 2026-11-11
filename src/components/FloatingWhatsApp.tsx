@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const FloatingWhatsApp: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isBouncing, setIsBouncing] = useState(false);
+  const [hasAppeared, setHasAppeared] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +22,21 @@ export const FloatingWhatsApp: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isVisible && !hasAppeared) {
+      setIsBouncing(true);
+      setHasAppeared(true);
+    }
+  }, [isVisible, hasAppeared]);
+
   return (
     <div
       className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 transition-all duration-300 ${
-        isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-90 pointer-events-none'
+        isVisible
+          ? `opacity-100 translate-y-0 scale-100 ${isBouncing ? 'animate-whatsapp-bounce' : ''}`
+          : 'opacity-0 translate-y-6 scale-90 pointer-events-none'
       }`}
+      onAnimationEnd={() => setIsBouncing(false)}
     >
       {/* Click tracking hook comment: Google Ads / Meta Pixel */}
       <a
@@ -41,7 +53,7 @@ export const FloatingWhatsApp: React.FC = () => {
           aria-hidden="true"
         />
 
-        <MessageCircle className="w-8 h-8 sm:w-9 sm:h-9 fill-white relative z-10" />
+        <WhatsAppIcon className="w-8 h-8 sm:w-9 sm:h-9 relative z-10" />
 
         {/* Hover / focus tooltip for desktop */}
         <span

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { MessageCircle, AlertCircle, Send, ShieldCheck } from 'lucide-react';
+import { AlertCircle, Send, ShieldCheck } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const QuoteForm: React.FC = () => {
   const [name, setName] = useState('');
@@ -168,7 +169,7 @@ export const QuoteForm: React.FC = () => {
                 type="text"
                 value={neighborhood}
                 onChange={(e) => setNeighborhood(e.target.value)}
-                placeholder="Ex: Eloy Chaves, Anhangabaú, Caxambu..."
+                placeholder="Informe seu bairro em Jundiaí"
                 className="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-white text-neutral-900 text-sm focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30 focus:outline-none transition-all"
               />
             </div>
@@ -186,7 +187,7 @@ export const QuoteForm: React.FC = () => {
                 rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Descreva detalhes como tamanho aproximado da área, se a piscina precisa de aspiração ou decantação, etc."
+                placeholder="Descreva brevemente o que você precisa."
                 className="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-white text-neutral-900 text-sm focus:border-[#2B921D] focus:ring-2 focus:ring-[#77D100]/30 focus:outline-none transition-all resize-y"
               />
             </div>
@@ -197,7 +198,7 @@ export const QuoteForm: React.FC = () => {
                 type="submit"
                 className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white text-base font-bold shadow-lg hover:shadow-xl active:scale-[0.99] transition-all cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
               >
-                <MessageCircle className="w-5 h-5 fill-white shrink-0" />
+                <WhatsAppIcon className="w-5 h-5 shrink-0" />
                 <span>Enviar Orçamento no WhatsApp</span>
                 <Send className="w-4 h-4 shrink-0" />
               </button>

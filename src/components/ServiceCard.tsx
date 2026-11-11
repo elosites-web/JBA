@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { MessageCircle, Scissors, Sparkles, Waves, Image as ImageIcon } from 'lucide-react';
+import { Scissors, Sparkles, Waves, Image as ImageIcon } from 'lucide-react';
 import { ServiceItem, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface ServiceCardProps {
   service: ServiceItem;
@@ -107,7 +108,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
                 : 'bg-[#2B921D] hover:bg-[#257c19] focus-visible:ring-[#77D100]'
             }`}
           >
-            <MessageCircle className="w-4 h-4 fill-white shrink-0" />
+            <WhatsAppIcon className="w-4 h-4 shrink-0" />
             <span>{service.ctaText}</span>
           </a>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { MapPin, Navigation } from 'lucide-react';
+import { Navigation } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const ServiceArea: React.FC = () => {
   return (
@@ -52,7 +53,7 @@ export const ServiceArea: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white font-bold text-base shadow-lg transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
               >
-                <MapPin className="w-5 h-5 text-[#FFF6B0] shrink-0" />
+                <WhatsAppIcon className="w-5 h-5 shrink-0" />
                 <span>{siteConfig.serviceArea.ctaText}</span>
               </a>
             </div>

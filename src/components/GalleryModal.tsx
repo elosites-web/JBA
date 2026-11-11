@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { X, ChevronLeft, ChevronRight, MessageCircle, ZoomIn } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { GalleryItem, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface GalleryModalProps {
   item: GalleryItem | null;
@@ -160,7 +161,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({
             rel="noopener noreferrer"
             className="w-full md:w-auto shrink-0 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white font-bold text-sm shadow-xl transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
           >
-            <MessageCircle className="w-4 h-4 fill-white shrink-0" />
+            <WhatsAppIcon className="w-4 h-4 shrink-0" />
             <span>Orçar este serviço no WhatsApp</span>
           </a>
         </div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { MessageCircle, Phone, MapPin, User, Shield } from 'lucide-react';
+import { Phone, MapPin, User, Shield } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
 import { BrandLogo } from './BrandLogo';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -19,7 +20,7 @@ export const Footer: React.FC = () => {
               {siteConfig.brand.fullName}
             </p>
             <p className="text-xs text-emerald-200/70 leading-relaxed max-w-sm">
-              Serviços de corte de grama com roçadeira, poda de plantas com tesourão e limpeza de piscinas residenciais.
+              Serviços de corte de grama com roçadeira, poda de plantas com tesourão de jardineiro e limpeza de piscinas em Jundiaí.
             </p>
           </div>
 
@@ -45,7 +46,7 @@ export const Footer: React.FC = () => {
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#77D100] shrink-0" />
                 <span>
-                  <strong>Telefone/WhatsApp:</strong> {siteConfig.brand.phoneFormatted}
+                  <strong>WhatsApp:</strong> {siteConfig.brand.phoneFormatted}
                 </span>
               </li>
             </ul>
@@ -65,7 +66,7 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] text-white text-xs font-bold transition-all shadow-md"
             >
-              <MessageCircle className="w-4 h-4 fill-white" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>Chamar no WhatsApp</span>
             </a>
           </div>
@@ -82,7 +83,7 @@ export const Footer: React.FC = () => {
               * {siteConfig.disclaimer.aiImagesText}
             </p>
             <p className="text-[11px] text-emerald-300/50">
-              Controlador dos dados de atendimento: {siteConfig.brand.responsiblePerson} (JBA).
+              Este site não armazena nem realiza tratamento de dados em servidores. As mensagens são direcionadas exclusivamente para o WhatsApp.
             </p>
           </div>
 

@@ -30,9 +30,8 @@ As imagens dos 3 serviços foram salvas em formato WebP otimizado (proporção 4
 
 - `public/images/corte-de-grama.webp` (Corte de grama com roçadeira)
 - `public/images/poda-de-plantas.webp` (Poda de plantas com tesourão)
-- `public/images/limpeza-de-piscinas.webp` (Limpeza de piscinas)
-- `public/images/jba-logo-original-1311x784.png` / `jba-logo-transparente.png` (Logotipo oficial JBA com fundo transparente)
-- `public/favicon/` (Pacote completo de favicons e webmanifest)
+- `public/images/jba-logo.png` / `public/images/jba-logo-original-1311x784.png` (Logotipo oficial JBA)
+- `public/images/favicon-512x512.png` (Favicon oficial JBA) e `public/images/site.webmanifest`
 
 ### 📸 Imagens da Galeria de Trabalhos (substituíveis por fotos reais):
 - `public/images/galeria-corte-grama-1.webp` (Gramado residencial aparado)

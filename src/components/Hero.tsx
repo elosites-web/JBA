@@ -1,6 +1,7 @@
 import React from 'react';
-import { MessageCircle, MapPin, CheckCircle, ArrowDown } from 'lucide-react';
+import { MapPin, CheckCircle, ArrowDown } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const Hero: React.FC = () => {
   return (
@@ -28,7 +29,7 @@ export const Hero: React.FC = () => {
             {/* Location Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#165C2A]/70 border border-[#77D100]/40 text-emerald-200 text-xs sm:text-sm font-semibold tracking-wide">
               <MapPin className="w-3.5 h-3.5 text-[#77D100]" />
-              <span>{siteConfig.brand.fullLocation} • Atendimento Residencial</span>
+              <span>{siteConfig.brand.fullLocation}</span>
             </div>
 
             {/* Official Logo in Prominent Display */}
@@ -62,7 +63,7 @@ export const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white text-base font-bold shadow-xl shadow-emerald-950/60 hover:shadow-emerald-900/80 hover:scale-[1.02] active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
               >
-                <MessageCircle className="w-5 h-5 fill-white shrink-0" />
+                <WhatsAppIcon className="w-5 h-5 shrink-0" />
                 <span>{siteConfig.hero.ctaText}</span>
               </a>
 
@@ -155,7 +156,7 @@ export const Hero: React.FC = () => {
                   rel="noopener noreferrer"
                   className="w-full py-2.5 px-3 rounded-lg bg-[#2B921D] hover:bg-[#34ab23] text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                 >
-                  <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                  <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
                   <span>Chamar no WhatsApp: {siteConfig.brand.phoneFormatted}</span>
                 </a>
               </div>

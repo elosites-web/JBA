@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const FAQ: React.FC = () => {
   // Open the first item by default for clear UX
@@ -85,7 +86,7 @@ export const FAQ: React.FC = () => {
                   >
                     <p>{item.answer}</p>
                     <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center gap-2">
-                      <MessageCircle className="w-4 h-4 text-[#2B921D]" />
+                      <WhatsAppIcon className="w-4 h-4 text-[#2B921D]" />
                       <a
                         href={buildWhatsAppLink(`Olá, Aristeu! Tenho uma dúvida sobre: ${item.question}`)}
                         target="_blank"
@@ -119,7 +120,7 @@ export const FAQ: React.FC = () => {
             rel="noopener noreferrer"
             className="shrink-0 px-5 py-2.5 rounded-xl bg-[#0A2F0D] hover:bg-[#165C2A] text-white text-xs font-bold transition-colors inline-flex items-center gap-2"
           >
-            <MessageCircle className="w-4 h-4 text-[#77D100]" />
+            <WhatsAppIcon className="w-4 h-4 text-[#77D100]" />
             <span>Falar com o Aristeu</span>
           </a>
         </div>

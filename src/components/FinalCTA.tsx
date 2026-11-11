@@ -1,6 +1,7 @@
 import React from 'react';
-import { MessageCircle, Phone, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const FinalCTA: React.FC = () => {
   return (
@@ -31,24 +32,16 @@ export const FinalCTA: React.FC = () => {
           {siteConfig.finalCta.text}
         </p>
 
-        {/* Main CTA & Phone row */}
-        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Main CTA */}
+        <div className="pt-2 flex items-center justify-center">
           <a
             href={buildWhatsAppLink(siteConfig.finalCta.whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white text-base font-bold shadow-2xl shadow-emerald-950/80 hover:scale-[1.02] active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-[#77D100]"
           >
-            <MessageCircle className="w-5 h-5 fill-white shrink-0" />
+            <WhatsAppIcon className="w-5 h-5 shrink-0" />
             <span>{siteConfig.finalCta.ctaText}</span>
-          </a>
-
-          <a
-            href={`tel:${siteConfig.brand.whatsappNumber}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#165C2A]/60 hover:bg-[#165C2A] text-emerald-100 hover:text-white border border-[#2B921D]/50 text-base font-medium transition-all"
-          >
-            <Phone className="w-4 h-4 text-[#77D100]" />
-            <span>Ligar: {siteConfig.brand.phoneFormatted}</span>
           </a>
         </div>
 

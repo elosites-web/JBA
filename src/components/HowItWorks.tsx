@@ -1,6 +1,7 @@
 import React from 'react';
 import { MessageSquare, CalendarClock, CheckCheck, ArrowRight } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const HowItWorks: React.FC = () => {
   const stepIcons = [
@@ -74,6 +75,7 @@ export const HowItWorks: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-bold text-[#165C2A] hover:text-[#2B921D] transition-colors group"
           >
+            <WhatsAppIcon className="w-4 h-4 text-[#2B921D]" />
             <span>Iniciar etapa 1 agora pelo WhatsApp</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>

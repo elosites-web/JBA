@@ -22,7 +22,7 @@ export const Services: React.FC = () => {
             Serviços Especializados em Jundiaí
           </h2>
           <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
-            Conheça abaixo os três principais serviços prestados pela JBA para a manutenção e valorização da sua casa, chácara ou condomínio.
+            Conheça abaixo os serviços prestados pela JBA em corte de grama, poda de plantas e limpeza de piscinas em Jundiaí.
           </p>
         </div>
 

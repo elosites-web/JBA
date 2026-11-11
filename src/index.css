@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --jba-green-darkest: #0A2F0D;
+    --jba-green-dark: #165C2A;
+    --jba-green-main: #2B921D;
+    --jba-green-mid: #4CAB09;
+    --jba-green-lime: #77D100;
+    --jba-green-flora: #2F9A3D;
+    --jba-blue-water: #0A84C9;
+    --jba-blue-light: #4FD0FF;
+    --jba-blue-sky: #8FD3FF;
+    --jba-yellow-light: #FFF6B0;
+    --jba-bg-light: #F7FAF6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #1a202c;
+    background-color: #F7FAF6;
+  }
+
+  /* Accessible focus indicators */
+  :focus-visible {
+    outline: 3px solid #77D100;
+    outline-offset: 2px;
+  }
+}
+
+/* Custom brand utility classes */
+.bg-jba-dark {
+  background-color: #0A2F0D;
+}
+.bg-jba-dark-forest {
+  background-color: #165C2A;
+}
+.bg-jba-light {
+  background-color: #F7FAF6;
+}
+.text-jba-lime {
+  color: #77D100;
+}
+.text-jba-blue {
+  color: #0A84C9;
+}
+.border-jba-lime {
+  border-color: #77D100;
+}
+.border-jba-green {
+  border-color: #2B921D;
+}
+
+/* Smooth fade-in-up scroll reveal animation */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition-property: opacity, transform;
+  transition-duration: 700ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay utilities */
+.reveal-delay-100 {
+  transition-delay: 100ms;
+}
+.reveal-delay-200 {
+  transition-delay: 200ms;
+}
+.reveal-delay-300 {
+  transition-delay: 300ms;
+}
+.reveal-delay-400 {
+  transition-delay: 400ms;
+}
+
+/* Skeleton screen shimmer animation */
+@keyframes skeleton-shimmer-anim {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #e5e7eb 0%,
+    #f3f4f6 50%,
+    #e5e7eb 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer-anim 1.6s infinite ease-in-out;
+}
+
+/* Strict respect for users preferring reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .skeleton-shimmer {
+    background: #e5e7eb !important;
+    animation: none !important;
+  }
+}

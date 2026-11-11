@@ -1,0 +1,6 @@
+{
+  "name": "JBA - Jardinagem e Limpeza de Piscinas",
+  "description": "Corte de grama, poda de plantas e limpeza de piscinas em Jundiaí, SP. Conheça os serviços da JBA e solicite um orçamento pelo WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

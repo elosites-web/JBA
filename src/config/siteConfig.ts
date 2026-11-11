@@ -9,6 +9,17 @@ export interface ServiceItem {
   whatsappMessage: string;
 }
 
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: 'corte-de-grama' | 'poda-de-plantas' | 'limpeza-de-piscinas';
+  categoryLabel: string;
+  image: string;
+  alt: string;
+  description: string;
+  whatsappMessage: string;
+}
+
 export interface SiteConfig {
   brand: {
     name: string;
@@ -27,6 +38,7 @@ export interface SiteConfig {
     faviconUrl: string;
   };
   services: ServiceItem[];
+  gallery: GalleryItem[];
   hero: {
     title: string;
     subtitle: string;
@@ -134,6 +146,80 @@ export const siteConfig: SiteConfig = {
       ctaText: 'Orçar limpeza de piscina',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar um orçamento para limpeza de piscina em Jundiaí.',
+    },
+  ],
+  gallery: [
+    {
+      id: 'galeria-corte-grama-1',
+      title: 'Gramado Residencial Aparado',
+      category: 'corte-de-grama',
+      categoryLabel: 'Corte de Grama',
+      image: '/images/galeria-corte-grama-1.webp',
+      alt: 'Gramado residencial impecavelmente aparado com canteiros floridos em Jundiaí.',
+      description:
+        'Corte uniforme e alinhamento de bordas ao longo dos canteiros e calçada de pedra em residência.',
+      whatsappMessage:
+        'Olá, Aristeu! Vi o trabalho de corte de grama residencial na galeria e gostaria de um orçamento para meu imóvel em Jundiaí.',
+    },
+    {
+      id: 'galeria-poda-plantas-1',
+      title: 'Poda e Nivelamento de Cerca Viva',
+      category: 'poda-de-plantas',
+      categoryLabel: 'Poda de Plantas',
+      image: '/images/galeria-poda-plantas-1.webp',
+      alt: 'Cerca viva verde densa com linhas retas e arbustos esculturais podados.',
+      description:
+        'Alinhamento com tesourão de jardineiro, acabamento reto e preservação da folhagem saudável.',
+      whatsappMessage:
+        'Olá, Aristeu! Vi a poda de cerca viva na galeria e gostaria de solicitar um orçamento para poda em Jundiaí.',
+    },
+    {
+      id: 'galeria-limpeza-piscina-1',
+      title: 'Piscina Residencial Cristalina',
+      category: 'limpeza-de-piscinas',
+      categoryLabel: 'Limpeza de Piscina',
+      image: '/images/galeria-limpeza-piscina-1.webp',
+      alt: 'Piscina residencial de azulejos azuis com água limpa e espelhada.',
+      description:
+        'Aspiração do fundo, remoção de folhas e limpeza das bordas para água limpa e transparente.',
+      whatsappMessage:
+        'Olá, Aristeu! Vi a limpeza de piscina residencial na galeria e gostaria de solicitar um orçamento em Jundiaí.',
+    },
+    {
+      id: 'galeria-corte-grama-2',
+      title: 'Manutenção de Chácara / Área Ampla',
+      category: 'corte-de-grama',
+      categoryLabel: 'Corte de Grama',
+      image: '/images/galeria-corte-grama-2.webp',
+      alt: 'Área ampla de gramado verde de chácara em Jundiaí com corte alinhado.',
+      description:
+        'Corte de grandes extensões de gramado com roçadeira a gasolina e descarte organizado de sobras.',
+      whatsappMessage:
+        'Olá, Aristeu! Vi a manutenção de gramado amplo na galeria e gostaria de um orçamento para chácara em Jundiaí.',
+    },
+    {
+      id: 'galeria-poda-plantas-2',
+      title: 'Paisagismo e Poda de Folhagens Tropicais',
+      category: 'poda-de-plantas',
+      categoryLabel: 'Poda de Plantas',
+      image: '/images/galeria-poda-plantas-2.webp',
+      alt: 'Arbustos tropicais, palmeiras e plantas ornamentais podadas em jardim de lazer.',
+      description:
+        'Cuidado com palmeiras, arbustos e canteiros, promovendo crescimento saudável e visual harmonioso.',
+      whatsappMessage:
+        'Olá, Aristeu! Vi o cuidado com plantas ornamentais na galeria e gostaria de um orçamento em Jundiaí.',
+    },
+    {
+      id: 'galeria-limpeza-piscina-2',
+      title: 'Área de Lazer com Piscina Tratada',
+      category: 'limpeza-de-piscinas',
+      categoryLabel: 'Limpeza de Piscina',
+      image: '/images/galeria-limpeza-piscina-2.webp',
+      alt: 'Piscina com água azul pura refletindo árvores ao lado de deck de madeira.',
+      description:
+        'Manutenção periódica de piscina, aspiração minuciosa e equilíbrio para banho seguro e convidativo.',
+      whatsappMessage:
+        'Olá, Aristeu! Gostaria de um orçamento para manutenção periódica de piscina em Jundiaí.',
     },
   ],
   howItWorks: [

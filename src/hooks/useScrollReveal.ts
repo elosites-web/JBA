@@ -43,9 +43,23 @@ export function useScrollReveal() {
       threshold: 0.1,
     });
 
-    const elements = document.querySelectorAll('.reveal-on-scroll');
-    elements.forEach((el) => {
-      observer.observe(el);
+    const observeElements = () => {
+      const elements = document.querySelectorAll('.reveal-on-scroll:not(.is-revealed)');
+      elements.forEach((el) => {
+        observer.observe(el);
+      });
+    };
+
+    observeElements();
+
+    // Observe DOM mutations (e.g. gallery filter category switches)
+    const mutationObserver = new MutationObserver(() => {
+      observeElements();
+    });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
 
     // Handle dynamic motion preference changes
@@ -59,6 +73,7 @@ export function useScrollReveal() {
 
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
       prefersReducedMotion.removeEventListener('change', handleMotionChange);
     };
   }, []);

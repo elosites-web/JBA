@@ -8,10 +8,11 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { label: 'Serviços', href: '#servicos' },
+    { label: 'Galeria', href: '#galeria' },
     { label: 'Como Funciona', href: '#como-funciona' },
     { label: 'Diferenciais', href: '#diferenciais' },
     { label: 'Jundiaí', href: '#atendimento' },
-    { label: 'Perguntas Frequentes', href: '#faq' },
+    { label: 'FAQ', href: '#faq' },
   ];
 
   const handleNavClick = (href: string) => {

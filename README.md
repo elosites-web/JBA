@@ -31,10 +31,18 @@ As imagens dos 3 serviços foram salvas em formato WebP otimizado (proporção 4
 - `public/images/corte-de-grama.webp` (Corte de grama com roçadeira)
 - `public/images/poda-de-plantas.webp` (Poda de plantas com tesourão)
 - `public/images/limpeza-de-piscinas.webp` (Limpeza de piscinas)
-- `public/images/jba-logo-transparente.png` (Logotipo oficial JBA com fundo transparente)
-- `public/favicon-512x512.png` (Ícone de navegação 512x512)
+- `public/images/jba-logo-original-1311x784.png` / `jba-logo-transparente.png` (Logotipo oficial JBA com fundo transparente)
+- `public/favicon/` (Pacote completo de favicons e webmanifest)
 
-Para trocar qualquer foto por fotos reais de trabalhos realizados no futuro, basta substituir os arquivos com o mesmo nome na pasta `public/images/`.
+### 📸 Imagens da Galeria de Trabalhos (substituíveis por fotos reais):
+- `public/images/galeria-corte-grama-1.webp` (Gramado residencial aparado)
+- `public/images/galeria-corte-grama-2.webp` (Manutenção de chácara / área ampla)
+- `public/images/galeria-poda-plantas-1.webp` (Poda e nivelamento de cerca viva)
+- `public/images/galeria-poda-plantas-2.webp` (Paisagismo e poda de folhagens tropicais)
+- `public/images/galeria-limpeza-piscina-1.webp` (Piscina residencial cristalina)
+- `public/images/galeria-limpeza-piscina-2.webp` (Área de lazer com piscina tratada)
+
+Para trocar qualquer foto por fotos reais de trabalhos realizados no futuro pelo Aristeu, basta substituir os arquivos com o mesmo nome na pasta `public/images/`.
 
 ---
 

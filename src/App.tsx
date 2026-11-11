@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
+import { Gallery } from './components/Gallery';
 import { HowItWorks } from './components/HowItWorks';
 import { WhyChooseJBA } from './components/WhyChooseJBA';
 import { ServiceArea } from './components/ServiceArea';
@@ -28,6 +29,9 @@ export default function App() {
 
         {/* 3 Core Services */}
         <Services />
+
+        {/* Gallery Section with Lightbox Modal */}
+        <Gallery />
 
         {/* How It Works - 3 Steps */}
         <HowItWorks />

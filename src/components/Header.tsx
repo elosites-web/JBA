@@ -524,7 +524,7 @@ export const Header: React.FC = () => {
                 ref={menuButtonRef}
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] ${
+                className={`w-9 h-9 aspect-square flex items-center justify-center shrink-0 rounded-xl border transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] ${
                   isMobileMenuOpen
                     ? 'bg-[#165C2A] text-white border-[#77D100]/60 shadow-inner'
                     : 'bg-[#165C2A]/50 hover:bg-[#165C2A] text-emerald-100 hover:text-white border-[#2B921D]/40'

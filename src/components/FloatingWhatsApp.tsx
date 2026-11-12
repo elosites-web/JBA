@@ -5,29 +5,55 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 export const FloatingWhatsApp: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isBouncing, setIsBouncing] = useState(false);
-  const [hasAppeared, setHasAppeared] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Show button after user scrolls past first 150px
-      if (window.scrollY > 150) {
-        setIsVisible(true);
+    let timer: NodeJS.Timeout | null = null;
+    let isOutsideHero = false;
+
+    const evaluateHeroPosition = () => {
+      const heroEl = document.getElementById('inicio');
+      if (!heroEl) return;
+
+      const rect = heroEl.getBoundingClientRect();
+      // Considered completely left only when the bottom of #inicio is above the top of the viewport
+      const hasLeftHero = rect.bottom <= 0;
+
+      if (hasLeftHero) {
+        if (!isOutsideHero) {
+          isOutsideHero = true;
+          if (timer) clearTimeout(timer);
+          // Start 35-second delay timer after leaving Hero
+          timer = setTimeout(() => {
+            setIsVisible(true);
+            setIsBouncing(true);
+          }, 35000);
+        }
       } else {
+        // Visitor is viewing the Hero or has returned into it
+        if (isOutsideHero) {
+          isOutsideHero = false;
+        }
+        if (timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+        // Button must never appear while viewing Hero
         setIsVisible(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', evaluateHeroPosition, { passive: true });
+    window.addEventListener('resize', evaluateHeroPosition, { passive: true });
 
-  useEffect(() => {
-    if (isVisible && !hasAppeared) {
-      setIsBouncing(true);
-      setHasAppeared(true);
-    }
-  }, [isVisible, hasAppeared]);
+    // Initial check
+    evaluateHeroPosition();
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      window.removeEventListener('scroll', evaluateHeroPosition);
+      window.removeEventListener('resize', evaluateHeroPosition);
+    };
+  }, []);
 
   return (
     <div

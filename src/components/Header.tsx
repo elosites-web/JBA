@@ -155,11 +155,11 @@ export const Header: React.FC = () => {
   useEffect(() => {
     const updateHeaderHeight = () => {
       if (!headerRef.current) return;
-      const height = headerRef.current.getBoundingClientRect().height;
+      const height = Math.round(headerRef.current.getBoundingClientRect().height);
       if (height > 0) {
         document.documentElement.style.setProperty('--jba-header-height', `${height}px`);
         headerHeightRef.current = height;
-        setHeaderHeight((prev) => (Math.abs(prev - height) > 0.5 ? height : prev));
+        setHeaderHeight((prev) => (Math.abs(prev - height) >= 2 ? height : prev));
       }
     };
 
@@ -339,9 +339,12 @@ export const Header: React.FC = () => {
           behavior: 'smooth',
         });
 
-        if (window.history && window.history.pushState) {
-          window.history.pushState(null, '', href);
-        }
+        // Delay state update slightly to avoid synchronous layout re-evaluation during initial smooth scroll frame
+        setTimeout(() => {
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', href);
+          }
+        }, 50);
       }
     });
   };
@@ -433,20 +436,14 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <header ref={headerRef} className="sticky top-0 z-50 w-full header-frosted-glass transition-all">
+      <header ref={headerRef} className="sticky top-0 z-50 w-full header-frosted-glass">
         {/* High-performance RAF scroll progress bar (zero Header re-renders on scroll) */}
         <ScrollProgressBar />
 
         {/* Subtle wind-swept botanical leaf etchings embedded into frosted glass */}
         <HeaderGlassEtchings />
 
-        <div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.18),inset_0_-1px_0_0_rgba(0,0,0,0.20)]"
-          style={{
-            background:
-              'radial-gradient(ellipse 95% 140% at 50% 50%, transparent 60%, rgba(4, 18, 6, 0.20) 85%, rgba(2, 10, 3, 0.36) 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 100%)',
-          }}
-        >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div ref={headerBarRef} className="flex items-center justify-between h-20 animate-header-fade-in">
             {/* Logo */}
             <a
@@ -482,10 +479,10 @@ export const Header: React.FC = () => {
                       handleNavClick(link.href);
                     }}
                     aria-current={isActive ? 'location' : undefined}
-                    className={`text-xs xl:text-sm font-semibold text-white transition-all rounded-lg px-2.5 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] ${
+                    className={`text-xs xl:text-sm font-semibold text-white transition-colors duration-150 rounded-lg px-2.5 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] border ${
                       isActive
-                        ? 'bg-[#165C2A]/60 shadow-sm border border-[#77D100]/30 font-bold'
-                        : 'hover:bg-[#165C2A]/30'
+                        ? 'bg-[#165C2A]/60 shadow-sm border-[#77D100]/40 font-bold'
+                        : 'border-transparent hover:bg-[#165C2A]/30'
                     }`}
                   >
                     {link.label}
@@ -494,31 +491,35 @@ export const Header: React.FC = () => {
               })}
             </nav>
 
-            {/* Desktop Right CTA */}
+            {/* Desktop Right CTA with Animated Perimeter Light Sweep */}
             <div className="hidden lg:flex items-center gap-4">
-              <a
-                href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white text-sm font-bold shadow-md hover:shadow-emerald-900/50 hover:scale-[1.02] active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100]"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-                <span>Solicitar visita</span>
-              </a>
+              <div className="header-cta-sweep">
+                <a
+                  href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#2B921D] hover:bg-[#34ab23] active:bg-[#207016] text-white text-sm font-bold shadow-sm hover:shadow-emerald-900/50 hover:scale-[1.01] active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100]"
+                >
+                  <WhatsAppIcon className="w-4 h-4" />
+                  <span>Solicitar visita</span>
+                </a>
+              </div>
             </div>
 
             {/* Mobile & Tablet Controls (< 1024px: No gap between breakpoints) */}
             <div className="flex lg:hidden items-center gap-2 sm:gap-3">
-              <a
-                href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-[#2B921D] hover:bg-[#34ab23] text-white text-xs sm:text-sm font-bold shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100]"
-                aria-label="Solicitar visita no WhatsApp"
-              >
-                <WhatsAppIcon className="w-4 h-4 shrink-0" />
-                <span>Solicitar visita</span>
-              </a>
+              <div className="header-cta-sweep">
+                <a
+                  href={buildWhatsAppLink('Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento com a JBA em Jundiaí.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 inline-flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-[#2B921D] hover:bg-[#34ab23] text-white text-xs sm:text-sm font-bold shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100]"
+                  aria-label="Solicitar visita no WhatsApp"
+                >
+                  <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                  <span>Solicitar visita</span>
+                </a>
+              </div>
 
               <button
                 ref={menuButtonRef}

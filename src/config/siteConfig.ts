@@ -119,10 +119,10 @@ export const siteConfig: SiteConfig = {
       shortTitle: 'Corte de grama',
       description:
         'Corte de grama com roçadeira para cuidar de jardins, quintais e outras áreas gramadas.',
-      image: '/images/foto-corte-grama.webp',
+      image: '/images/corte-de-grama.webp',
       srcSet:
-        '/images/foto-corte-grama-400w.webp 400w, /images/foto-corte-grama-800w.webp 800w, /images/foto-corte-grama.webp 1200w',
-      alt: 'Fotografia ilustrativa de corte de grama com roçadeira.',
+        '/images/corte-de-grama-400w.webp 400w, /images/corte-de-grama-800w.webp 800w, /images/corte-de-grama.webp 1200w',
+      alt: 'Fotografia ilustrativa de corte de grama com roçadeira operada por profissional com uniforme da JBA.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
@@ -133,10 +133,10 @@ export const siteConfig: SiteConfig = {
       shortTitle: 'Poda de plantas',
       description:
         'Poda de plantas, arbustos e cercas vivas com tesourão de jardineiro.',
-      image: '/images/foto-poda-plantas.webp',
+      image: '/images/poda-de-plantas.webp',
       srcSet:
-        '/images/foto-poda-plantas-400w.webp 400w, /images/foto-poda-plantas-800w.webp 800w, /images/foto-poda-plantas.webp 1200w',
-      alt: 'Fotografia ilustrativa de poda de plantas com tesourão de jardineiro.',
+        '/images/poda-de-plantas-400w.webp 400w, /images/poda-de-plantas-800w.webp 800w, /images/poda-de-plantas.webp 1200w',
+      alt: 'Fotografia ilustrativa de poda de plantas e cerca viva com tesourão de jardineiro por profissional com uniforme da JBA.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
@@ -147,10 +147,10 @@ export const siteConfig: SiteConfig = {
       shortTitle: 'Limpeza de piscina',
       description:
         'Limpeza de piscinas. Entre em contato para conversar sobre as necessidades do local e solicitar uma avaliação.',
-      image: '/images/foto-limpeza-piscina.webp',
+      image: '/images/limpeza-de-piscinas.webp',
       srcSet:
-        '/images/foto-limpeza-piscina-400w.webp 400w, /images/foto-limpeza-piscina-800w.webp 800w, /images/foto-limpeza-piscina.webp 1200w',
-      alt: 'Fotografia ilustrativa de piscina limpa com água tratada.',
+        '/images/limpeza-de-piscinas-400w.webp 400w, /images/limpeza-de-piscinas-800w.webp 800w, /images/limpeza-de-piscinas.webp 1200w',
+      alt: 'Fotografia ilustrativa de limpeza e aspiração física de piscina por profissional com uniforme da JBA.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
@@ -161,10 +161,10 @@ export const siteConfig: SiteConfig = {
       shortTitle: 'Paisagismo',
       description:
         'Serviços de paisagismo para organização e valorização de áreas verdes, considerando as características de cada espaço.',
-      image: '/images/foto-plantas-paisagismo.webp',
+      image: '/images/paisagismo.webp',
       srcSet:
-        '/images/foto-plantas-paisagismo-400w.webp 400w, /images/foto-plantas-paisagismo-800w.webp 800w, /images/foto-plantas-paisagismo.webp 1200w',
-      alt: 'Fotografia ilustrativa de plantas ornamentais e arranjo de paisagismo em área externa.',
+        '/images/paisagismo-400w.webp 400w, /images/paisagismo-800w.webp 800w, /images/paisagismo.webp 1200w',
+      alt: 'Fotografia ilustrativa de plantio e organização de plantas ornamentais em paisagismo por profissional com uniforme da JBA.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de paisagismo em Jundiaí.',

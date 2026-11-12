@@ -120,8 +120,8 @@ export const Hero: React.FC = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2 sm:gap-2.5 mb-4">
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/foto-corte-grama-400w.webp"
-                    srcSet="/images/foto-corte-grama-400w.webp 400w, /images/foto-corte-grama-800w.webp 800w, /images/foto-corte-grama.webp 1200w"
+                    src="/images/corte-de-grama-400w.webp"
+                    srcSet="/images/corte-de-grama-400w.webp 400w, /images/corte-de-grama-800w.webp 800w, /images/corte-de-grama.webp 1200w"
                     sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
                     alt="Corte de grama com roçadeira"
                     className="w-full h-full object-cover transition-opacity duration-300"
@@ -130,15 +130,15 @@ export const Hero: React.FC = () => {
                     width="400"
                     height="300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
-                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Corte de Grama</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-1.5 sm:p-2 z-10">
+                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Corte de Grama</span>
                   </div>
                 </div>
 
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/foto-poda-plantas-400w.webp"
-                    srcSet="/images/foto-poda-plantas-400w.webp 400w, /images/foto-poda-plantas-800w.webp 800w, /images/foto-poda-plantas.webp 1200w"
+                    src="/images/poda-de-plantas-400w.webp"
+                    srcSet="/images/poda-de-plantas-400w.webp 400w, /images/poda-de-plantas-800w.webp 800w, /images/poda-de-plantas.webp 1200w"
                     sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
                     alt="Poda de plantas com tesourão"
                     className="w-full h-full object-cover transition-opacity duration-300"
@@ -147,15 +147,15 @@ export const Hero: React.FC = () => {
                     width="400"
                     height="300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
-                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Poda de Plantas</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-1.5 sm:p-2 z-10">
+                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Poda de Plantas</span>
                   </div>
                 </div>
 
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#0A84C9]/50 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/foto-limpeza-piscina-400w.webp"
-                    srcSet="/images/foto-limpeza-piscina-400w.webp 400w, /images/foto-limpeza-piscina-800w.webp 800w, /images/foto-limpeza-piscina.webp 1200w"
+                    src="/images/limpeza-de-piscinas-400w.webp"
+                    srcSet="/images/limpeza-de-piscinas-400w.webp 400w, /images/limpeza-de-piscinas-800w.webp 800w, /images/limpeza-de-piscinas.webp 1200w"
                     sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
                     alt="Limpeza de piscinas"
                     className="w-full h-full object-cover transition-opacity duration-300"
@@ -164,15 +164,15 @@ export const Hero: React.FC = () => {
                     width="400"
                     height="300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
-                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Limpeza de Piscina</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-1.5 sm:p-2 z-10">
+                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Limpeza de Piscina</span>
                   </div>
                 </div>
 
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] border border-[#2B921D]/40 bg-[#0e3b12] skeleton-shimmer">
                   <img
-                    src="/images/foto-plantas-paisagismo-400w.webp"
-                    srcSet="/images/foto-plantas-paisagismo-400w.webp 400w, /images/foto-plantas-paisagismo-800w.webp 800w, /images/foto-plantas-paisagismo.webp 1200w"
+                    src="/images/paisagismo-400w.webp"
+                    srcSet="/images/paisagismo-400w.webp 400w, /images/paisagismo-800w.webp 800w, /images/paisagismo.webp 1200w"
                     sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
                     alt="Paisagismo e plantas ornamentais"
                     className="w-full h-full object-cover transition-opacity duration-300"
@@ -181,8 +181,8 @@ export const Hero: React.FC = () => {
                     width="400"
                     height="300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2 z-10">
-                    <span className="text-[11px] sm:text-[10px] lg:text-[11px] xl:text-[10px] font-bold text-white leading-tight">Paisagismo</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-1.5 sm:p-2 z-10">
+                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Paisagismo</span>
                   </div>
                 </div>
               </div>

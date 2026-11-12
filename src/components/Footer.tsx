@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Phone, MapPin, User, Shield, ChevronUp } from 'lucide-react';
 import { siteConfig, buildWhatsAppLink } from '../config/siteConfig';
 import { BrandLogo } from './BrandLogo';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { PrivacyModal } from './PrivacyModal';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -15,7 +17,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#051a07] text-white border-t border-[#165C2A]/60 pt-10 pb-24 md:pb-12">
+    <footer className="bg-[#051a07] text-white border-t border-[#165C2A]/60 pt-10 pb-32 sm:pb-36 lg:pb-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid: Brand, Business Data & Quick Contact */}
@@ -101,9 +103,9 @@ export const Footer: React.FC = () => {
           </button>
         </div>
 
-        {/* Legal, AI disclaimer & LGPD notes */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-emerald-200/60 text-center md:text-left">
-          <div className="space-y-1">
+        {/* Legal, AI disclaimer & LGPD notes (lg:pr-80 xl:pr-96 reserves space on desktop so floating WhatsApp + tooltip never overlaps) */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-emerald-200/60 text-center md:text-left lg:pr-80 xl:pr-96">
+          <div className="space-y-1.5 max-w-xl">
             <p>
               © {currentYear} {siteConfig.brand.fullName}. Todos os direitos reservados.
             </p>
@@ -111,19 +113,35 @@ export const Footer: React.FC = () => {
               * {siteConfig.disclaimer.aiImagesText}
             </p>
             <p className="text-[11px] text-emerald-300/50">
-              Este site não armazena nem realiza tratamento de dados em servidores. As mensagens são direcionadas exclusivamente para o WhatsApp.
+              Este site não armazena dados em servidores próprios. As mensagens preenchidas são direcionadas diretamente ao WhatsApp.
             </p>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px]">
-            <span className="flex items-center gap-1 text-emerald-300/70">
+          <div className="flex flex-col sm:flex-row items-center md:items-end gap-3 text-[11px] shrink-0">
+            <span className="flex items-center gap-1.5 text-emerald-300/70">
               <Shield className="w-3.5 h-3.5 text-[#77D100]" />
-              <span>Sem rastreadores invasivos • Respeito à sua privacidade</span>
+              <span>Privacidade e transparência</span>
             </span>
+
+            <span className="hidden sm:inline text-emerald-600">•</span>
+
+            <button
+              type="button"
+              onClick={() => setIsPrivacyOpen(true)}
+              className="text-[#77D100] hover:text-white underline font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#77D100] rounded cursor-pointer"
+            >
+              Política de Privacidade
+            </button>
           </div>
         </div>
 
       </div>
+
+      {/* Accessible Privacy Notice Modal */}
+      <PrivacyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
+      />
     </footer>
   );
 };

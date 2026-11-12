@@ -109,10 +109,15 @@ export const Gallery: React.FC = () => {
                 ? 'reveal-delay-200'
                 : '';
 
+            const isLastInFullGallery = activeCategory === 'todos' && index === filteredItems.length - 1;
+            const positioningClass = isLastInFullGallery
+              ? 'sm:col-span-2 sm:justify-self-center sm:w-full sm:max-w-[calc(50%-1rem)] lg:col-span-1 lg:max-w-none lg:w-full lg:col-start-2'
+              : '';
+
             return (
               <div
                 key={item.id}
-                className={`group relative rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer reveal-on-scroll ${delayClass}`}
+                className={`group relative rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer reveal-on-scroll ${delayClass} ${positioningClass}`}
                 onClick={() => setSelectedItem(item)}
               >
                 {/* 4:3 Aspect Ratio Image with Structured Skeleton State */}

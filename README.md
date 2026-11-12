@@ -28,8 +28,8 @@ Para alterar telefone, textos de serviços, adicionar bairros ou horários, bast
 
 As imagens dos 3 serviços foram salvas em formato WebP otimizado (proporção 4:3, alta resolução e peso reduzido):
 
-- `public/images/corte-de-grama.webp` (Corte de grama com roçadeira)
-- `public/images/poda-de-plantas.webp` (Poda de plantas com tesourão)
+- `public/images/corte-de-grama.webp` (Corte de grama)
+- `public/images/poda-de-plantas.webp` (Poda de plantas)
 - `public/images/jba-logo.png` / `public/images/jba-logo-original-1311x784.png` (Logotipo oficial JBA)
 - `public/images/favicon-512x512.png` (Favicon oficial JBA) e `public/images/site.webmanifest`
 

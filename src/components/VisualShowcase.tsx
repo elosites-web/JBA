@@ -32,18 +32,18 @@ export const VisualShowcase: React.FC = () => {
 
   const showcaseItems = [
     {
-      category: 'Corte de Grama',
-      title: 'Corte de Grama com Roçadeira',
-      description: 'Cuidado de áreas gramadas com utilização de roçadeira.',
+      category: 'Corte de grama',
+      title: 'Corte de grama',
+      description: 'Cuidado de áreas gramadas com acabamento uniforme e alinhado.',
       image: '/images/foto-gramado-amplo.webp',
-      alt: 'Fotografia ilustrativa de corte de grama com roçadeira',
+      alt: 'Fotografia ilustrativa de corte de grama',
       icon: <Sparkles className="w-4 h-4 text-[#77D100]" />,
       whatsappMsg:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
     {
-      category: 'Poda de Plantas',
-      title: 'Poda de Plantas',
+      category: 'Poda de plantas',
+      title: 'Poda de plantas',
       description: 'Poda e alinhamento de plantas, arbustos e cercas vivas.',
       image: '/images/foto-cerca-viva.webp',
       alt: 'Fotografia ilustrativa de poda de plantas e cerca viva',
@@ -52,14 +52,14 @@ export const VisualShowcase: React.FC = () => {
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
     },
     {
-      category: 'Limpeza de Piscinas',
-      title: 'Limpeza de Piscinas',
+      category: 'Limpeza de piscinas',
+      title: 'Limpeza de piscinas',
       description: 'Serviço de limpeza de piscinas, conforme as necessidades do local.',
       image: '/images/foto-piscina-cristalina.webp',
-      alt: 'Fotografia ilustrativa de serviço de limpeza de piscina',
+      alt: 'Fotografia ilustrativa de serviço de limpeza de piscinas',
       icon: <Waves className="w-4 h-4 text-[#4FD0FF]" />,
       whatsappMsg:
-        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscinas em Jundiaí.',
     },
     {
       category: 'Paisagismo',

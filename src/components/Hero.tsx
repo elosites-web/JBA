@@ -123,7 +123,7 @@ export const Hero: React.FC = () => {
                     src="/images/corte-de-grama-400w.webp"
                     srcSet="/images/corte-de-grama-400w.webp 400w, /images/corte-de-grama-800w.webp 800w, /images/corte-de-grama.webp 1200w"
                     sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
-                    alt="Corte de grama com roçadeira"
+                    alt="Corte de grama"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
                     decoding="async"
@@ -131,7 +131,7 @@ export const Hero: React.FC = () => {
                     height="300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-1.5 sm:p-2 z-10">
-                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Corte de Grama</span>
+                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Corte de grama</span>
                   </div>
                 </div>
 
@@ -140,7 +140,7 @@ export const Hero: React.FC = () => {
                     src="/images/poda-de-plantas-400w.webp"
                     srcSet="/images/poda-de-plantas-400w.webp 400w, /images/poda-de-plantas-800w.webp 800w, /images/poda-de-plantas.webp 1200w"
                     sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
-                    alt="Poda de plantas com tesourão"
+                    alt="Poda de plantas"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
                     decoding="async"
@@ -148,7 +148,7 @@ export const Hero: React.FC = () => {
                     height="300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-1.5 sm:p-2 z-10">
-                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Poda de Plantas</span>
+                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Poda de plantas</span>
                   </div>
                 </div>
 
@@ -165,7 +165,7 @@ export const Hero: React.FC = () => {
                     height="300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-1.5 sm:p-2 z-10">
-                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Limpeza de Piscina</span>
+                    <span className="text-[10.5px] sm:text-[9.5px] lg:text-[10px] xl:text-[9.5px] font-bold text-white leading-tight whitespace-nowrap">Limpeza de piscinas</span>
                   </div>
                 </div>
 
@@ -174,7 +174,7 @@ export const Hero: React.FC = () => {
                     src="/images/paisagismo-400w.webp"
                     srcSet="/images/paisagismo-400w.webp 400w, /images/paisagismo-800w.webp 800w, /images/paisagismo.webp 1200w"
                     sizes="(max-width: 640px) 160px, (max-width: 1280px) 200px, 120px"
-                    alt="Paisagismo e plantas ornamentais"
+                    alt="Paisagismo"
                     className="w-full h-full object-cover transition-opacity duration-300"
                     loading="eager"
                     decoding="async"

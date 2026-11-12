@@ -109,7 +109,7 @@ export const siteConfig: SiteConfig = {
   hero: {
     title: 'Jardinagem, paisagismo e limpeza de piscinas em Jundiaí.',
     subtitle:
-      'Corte de grama com roçadeira, poda de plantas e cuidado de áreas verdes e piscinas. Fale diretamente com Aristeu e solicite uma visita para avaliação.',
+      'Corte de grama, poda de plantas, limpeza de piscinas e paisagismo. Fale diretamente com Aristeu e solicite uma visita para avaliação.',
     ctaText: 'Consultar visita e orçamento',
   },
   services: [
@@ -118,11 +118,11 @@ export const siteConfig: SiteConfig = {
       title: 'Corte de grama',
       shortTitle: 'Corte de grama',
       description:
-        'Corte de grama com roçadeira para cuidar de jardins, quintais e outras áreas gramadas.',
+        'Corte de grama para cuidar de jardins, quintais e outras áreas gramadas.',
       image: '/images/corte-de-grama.webp',
       srcSet:
         '/images/corte-de-grama-400w.webp 400w, /images/corte-de-grama-800w.webp 800w, /images/corte-de-grama.webp 1200w',
-      alt: 'Fotografia ilustrativa de corte de grama com roçadeira operada por profissional com uniforme da JBA.',
+      alt: 'Fotografia ilustrativa de corte de grama por profissional com uniforme da JBA.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
@@ -132,11 +132,11 @@ export const siteConfig: SiteConfig = {
       title: 'Poda de plantas',
       shortTitle: 'Poda de plantas',
       description:
-        'Poda de plantas, arbustos e cercas vivas com tesourão de jardineiro.',
+        'Poda de plantas, arbustos e cercas vivas.',
       image: '/images/poda-de-plantas.webp',
       srcSet:
         '/images/poda-de-plantas-400w.webp 400w, /images/poda-de-plantas-800w.webp 800w, /images/poda-de-plantas.webp 1200w',
-      alt: 'Fotografia ilustrativa de poda de plantas e cerca viva com tesourão de jardineiro por profissional com uniforme da JBA.',
+      alt: 'Fotografia ilustrativa de poda de plantas e cerca viva por profissional com uniforme da JBA.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
@@ -144,16 +144,16 @@ export const siteConfig: SiteConfig = {
     {
       id: 'limpeza-de-piscinas',
       title: 'Limpeza de piscinas',
-      shortTitle: 'Limpeza de piscina',
+      shortTitle: 'Limpeza de piscinas',
       description:
         'Limpeza de piscinas. Entre em contato para conversar sobre as necessidades do local e solicitar uma avaliação.',
       image: '/images/limpeza-de-piscinas.webp',
       srcSet:
         '/images/limpeza-de-piscinas-400w.webp 400w, /images/limpeza-de-piscinas-800w.webp 800w, /images/limpeza-de-piscinas.webp 1200w',
-      alt: 'Fotografia ilustrativa de limpeza e aspiração física de piscina por profissional com uniforme da JBA.',
+      alt: 'Fotografia ilustrativa de limpeza de piscinas por profissional com uniforme da JBA.',
       ctaText: 'Solicitar avaliação',
       whatsappMessage:
-        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscinas em Jundiaí.',
     },
     {
       id: 'paisagismo',
@@ -175,13 +175,13 @@ export const siteConfig: SiteConfig = {
       id: 'galeria-corte-grama-1',
       title: 'Manutenção de gramado',
       category: 'corte-de-grama',
-      categoryLabel: 'Corte de Grama',
+      categoryLabel: 'Corte de grama',
       image: '/images/foto-corte-grama.webp',
       srcSet:
         '/images/foto-corte-grama-400w.webp 400w, /images/foto-corte-grama-800w.webp 800w, /images/foto-corte-grama.webp 1200w',
-      alt: 'Fotografia ilustrativa de corte de grama com roçadeira em área ajardinada.',
+      alt: 'Fotografia ilustrativa de corte de grama em área ajardinada.',
       description:
-        'Corte de grama em área ajardinada com utilização de roçadeira.',
+        'Corte de grama em área ajardinada.',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
@@ -189,39 +189,39 @@ export const siteConfig: SiteConfig = {
       id: 'galeria-poda-plantas-1',
       title: 'Poda de cerca viva',
       category: 'poda-de-plantas',
-      categoryLabel: 'Poda de Plantas',
+      categoryLabel: 'Poda de plantas',
       image: '/images/foto-poda-plantas.webp',
       srcSet:
         '/images/foto-poda-plantas-400w.webp 400w, /images/foto-poda-plantas-800w.webp 800w, /images/foto-poda-plantas.webp 1200w',
-      alt: 'Fotografia ilustrativa de poda de arbustos e cerca viva com tesourão de jardineiro.',
+      alt: 'Fotografia ilustrativa de poda de plantas e cerca viva.',
       description:
-        'Alinhamento e manutenção de arbustos e cercas vivas com tesourão.',
+        'Alinhamento e manutenção de arbustos e cercas vivas.',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de poda de plantas em Jundiaí.',
     },
     {
       id: 'galeria-limpeza-piscina-1',
-      title: 'Tratamento e limpeza de piscina',
+      title: 'Tratamento e limpeza de piscinas',
       category: 'limpeza-de-piscinas',
-      categoryLabel: 'Limpeza de Piscina',
+      categoryLabel: 'Limpeza de piscinas',
       image: '/images/foto-limpeza-piscina.webp',
       srcSet:
         '/images/foto-limpeza-piscina-400w.webp 400w, /images/foto-limpeza-piscina-800w.webp 800w, /images/foto-limpeza-piscina.webp 1200w',
       alt: 'Fotografia ilustrativa de piscina residencial com água limpa e tratada.',
       description:
-        'Higienização física e aspiração periódica de piscina.',
+        'Higienização física e limpeza periódica de piscinas.',
       whatsappMessage:
-        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscinas em Jundiaí.',
     },
     {
       id: 'galeria-corte-grama-2',
       title: 'Cuidado de gramado amplo',
       category: 'corte-de-grama',
-      categoryLabel: 'Corte de Grama',
+      categoryLabel: 'Corte de grama',
       image: '/images/foto-gramado-amplo.webp',
       alt: 'Fotografia ilustrativa de terreno amplo com gramado bem aparado.',
       description:
-        'Aparo uniforme da vegetação com roçadeira em terreno espaçoso.',
+        'Aparo uniforme da vegetação em terreno espaçoso.',
       whatsappMessage:
         'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de corte de grama em Jundiaí.',
     },
@@ -229,7 +229,7 @@ export const siteConfig: SiteConfig = {
       id: 'galeria-poda-plantas-2',
       title: 'Poda de folhagens ornamentais',
       category: 'poda-de-plantas',
-      categoryLabel: 'Poda de Plantas',
+      categoryLabel: 'Poda de plantas',
       image: '/images/foto-cerca-viva.webp',
       alt: 'Fotografia ilustrativa de plantas e folhagens ornamentais podadas.',
       description:
@@ -241,13 +241,13 @@ export const siteConfig: SiteConfig = {
       id: 'galeria-limpeza-piscina-2',
       title: 'Piscina residencial limpa',
       category: 'limpeza-de-piscinas',
-      categoryLabel: 'Limpeza de Piscina',
+      categoryLabel: 'Limpeza de piscinas',
       image: '/images/foto-piscina-cristalina.webp',
       alt: 'Fotografia ilustrativa de área externa com piscina limpa.',
       description:
         'Espaço de lazer com água tratada e bordas limpas.',
       whatsappMessage:
-        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscina em Jundiaí.',
+        'Olá, Aristeu! Gostaria de solicitar uma visita para avaliação e orçamento de limpeza de piscinas em Jundiaí.',
     },
     {
       id: 'galeria-paisagismo-1',
@@ -327,7 +327,7 @@ export const siteConfig: SiteConfig = {
     {
       question: 'Quais serviços posso solicitar à JBA?',
       answer:
-        'Você pode solicitar corte de grama com roçadeira, poda de plantas e cerca viva com tesourão de jardineiro, limpeza de piscinas e serviços de paisagismo.',
+        'Você pode solicitar corte de grama, poda de plantas, limpeza de piscinas e paisagismo.',
     },
     {
       question: 'Em qual cidade a JBA atende?',

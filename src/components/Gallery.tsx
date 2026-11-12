@@ -14,17 +14,17 @@ export const Gallery: React.FC = () => {
     { id: 'todos', label: 'Todos os Serviços' },
     {
       id: 'corte-de-grama',
-      label: 'Corte de Grama',
+      label: 'Corte de grama',
       icon: <Sparkles className="w-3.5 h-3.5 text-[#77D100]" />,
     },
     {
       id: 'poda-de-plantas',
-      label: 'Poda de Plantas',
+      label: 'Poda de plantas',
       icon: <Scissors className="w-3.5 h-3.5 text-[#77D100]" />,
     },
     {
       id: 'limpeza-de-piscinas',
-      label: 'Limpeza de Piscinas',
+      label: 'Limpeza de piscinas',
       icon: <Waves className="w-3.5 h-3.5 text-[#4FD0FF]" />,
     },
     {

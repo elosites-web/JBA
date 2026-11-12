@@ -18,8 +18,8 @@ export const QuoteForm: React.FC = () => {
   const todayMinDate = useMemo(() => getTodayMinDate(), []);
 
   const serviceOptions = [
-    { id: 'Corte de grama (com roçadeira)', label: 'Corte de grama (com roçadeira)' },
-    { id: 'Poda de plantas (com tesourão)', label: 'Poda de plantas (com tesourão)' },
+    { id: 'Corte de grama', label: 'Corte de grama' },
+    { id: 'Poda de plantas', label: 'Poda de plantas' },
     { id: 'Limpeza de piscinas', label: 'Limpeza de piscinas' },
     { id: 'Paisagismo', label: 'Paisagismo' },
   ];

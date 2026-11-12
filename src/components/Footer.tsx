@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
               {siteConfig.brand.fullName}
             </p>
             <p className="text-xs text-emerald-200/70 leading-relaxed max-w-sm">
-              Serviços de corte de grama com roçadeira, poda de plantas com tesourão de jardineiro, limpeza de piscinas e paisagismo em Jundiaí.
+              Serviços de corte de grama, poda de plantas, limpeza de piscinas e paisagismo em Jundiaí.
             </p>
           </div>
 
